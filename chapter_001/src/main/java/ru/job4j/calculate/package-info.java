@@ -3,6 +3,6 @@
 *
 * @author Ilshat Gaifutdinov (mailto:ilshatrashidovich@rambler.ru)
 * @version $Id$
-* @since 0.1
+* @since 09/09/2018
 */
 package ru.job4j.calculate;

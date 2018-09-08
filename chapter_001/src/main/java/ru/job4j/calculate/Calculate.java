@@ -4,7 +4,7 @@ package ru.job4j.calculate;
 * Calculate
 * Данный класс предназначен для запуска программы
 * @author Ilshat Gaifutdinov (ilshatrashidovich@rambler.ru)
-* @since 08/09/2018
+* @since 07/09/2018
 * @version 0.1
 */
 public class Calculate {
