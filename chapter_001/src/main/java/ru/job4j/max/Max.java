@@ -16,4 +16,16 @@ public class Max {
     public int max(int first, int second) {
         return first > second ? first : second;
     }
+
+    /**
+     * Возвращает максимальное значение из трех заданных.
+     * @param first первое значение.
+     * @param second второе значение.
+     * @param third третье значение.
+     * @return Максимумальное из трех заданных значений.
+     */
+    public int max(int first, int second, int third) {
+        int temp = max(first, second);
+        return max(temp, third);
+    }
 }
