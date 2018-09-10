@@ -1,7 +1,7 @@
 package ru.job4j.condition;
 
 /**
-*  @author Ilshat Gaifutdinov (mailto:ilshatrashidovich@rambler.ru)
+* @author Ilshat Gaifutdinov (mailto:ilshatrashidovich@rambler.ru)
 * @version $Id$
 * @since 0.1
 */
