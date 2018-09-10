@@ -22,7 +22,7 @@ public class MaxTest {
     @Test
     public void whenThirdGraterThanFirstAndSecond() {
         Max maxim = new Max();
-        int result = maxim.max(1, 3 ,4);
+        int result = maxim.max(1, 3, 4);
         assertThat(result, is(4));
     }
 

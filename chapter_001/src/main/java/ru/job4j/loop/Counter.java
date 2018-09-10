@@ -21,7 +21,7 @@ public class Counter {
      */
     public int add(int start, int finish) {
         int sumOfEvenNumbers = 0;
-        for(int arrayIndex = start; arrayIndex <= finish; arrayIndex++){
+        for (int arrayIndex = start; arrayIndex <= finish; arrayIndex++) {
             sumOfEvenNumbers += values[arrayIndex] % 2 == 0 ? values[arrayIndex] : 0;
         }
         return sumOfEvenNumbers;

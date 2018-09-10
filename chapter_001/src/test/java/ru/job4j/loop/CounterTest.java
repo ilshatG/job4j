@@ -15,9 +15,9 @@ public class CounterTest {
 
     @Test
     public void whenAddEvenNumbersFromOneTwoTenThirty() {
-        int[] testArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        Counter counter = new Counter( testArray );
-        int result = counter.add(0,9);
+        int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        Counter counter = new Counter(testArray);
+        int result = counter.add(0, 9);
         int expect = 30;
         assertThat(result, is(expect));
     }

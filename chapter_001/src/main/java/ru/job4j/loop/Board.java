@@ -16,10 +16,10 @@ public class Board {
     public String paint(int width, int height) {
         StringBuilder screen = new StringBuilder();
         String ln = System.lineSeparator();
-        for (int rowCount =0; rowCount < height; rowCount++) {
+        for (int rowCount = 0; rowCount < height; rowCount++) {
             for (int columnCount = 0; columnCount < width; columnCount++) {
                 // условие проверки, что писать пробел или X
-                if ( (rowCount + columnCount) % 2 == 0) {
+                if ((rowCount + columnCount) % 2 == 0) {
                     screen.append("x");
                 } else {
                     screen.append(" ");
