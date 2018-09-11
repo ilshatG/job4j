@@ -5,7 +5,7 @@ package ru.job4j.calculator;
  */
 public class Fit {
     //Коэффициент массы тела
-    private final double weightRatio = 1.15D;
+    private static final double WEIGHT_RATIO = 1.15D;
 
     /**
      * Идеальный вес для мужщины.
@@ -13,7 +13,7 @@ public class Fit {
      * @return идеальный вес.
      */
     public double manWeight(double height) {
-        return (height - 100) * weightRatio;
+        return (height - 100) * WEIGHT_RATIO;
     }
 
     /**
@@ -22,6 +22,6 @@ public class Fit {
      * @return идеальный вес.
      */
     public double womanWeight(double height) {
-        return (height - 110) * weightRatio;
+        return (height - 110) * WEIGHT_RATIO;
     }
 }
