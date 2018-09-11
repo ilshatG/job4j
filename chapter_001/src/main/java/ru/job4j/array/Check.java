@@ -24,6 +24,10 @@ public class Check {
             } else {
                 falseCount++;
             }
+            //досрочный выход из цикла если, в процессе перебора пошло смешение true и false. Для успорения работы метода
+            if (trueCount * falseCount != 0) {
+                break;
+            }
         }
         return trueCount * falseCount == 0;
     }
