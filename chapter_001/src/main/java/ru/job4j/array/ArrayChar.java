@@ -20,10 +20,12 @@ public class ArrayChar {
     public boolean startWith(String prefix) {
         boolean result = true;
         char[] value = prefix.toCharArray();
-        // проверить. что массив data имеет первые элементы одинаковые с value
-        //для предотвращения arrayIndexOutOfBounds добавлена еще одна проверка в объявлении цикла.
-        // Благодаря ей префикс и проверяемая строка как бы меняются местами, если первый длиннее.
-        for (int index = 0; index < value.length & index < data.length; index++) {
+
+        if (value.length > data.length || value.length == 0) {
+            return false;
+        }
+
+        for (int index = 0; index < value.length; index++) {
             if (data[index] != value[index]) {
                 result = false;
                 break;

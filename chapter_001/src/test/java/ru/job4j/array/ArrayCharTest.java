@@ -20,31 +20,23 @@ public class ArrayCharTest {
     }
 
     @Test
-    public void whenStartWithLongerPrefixThenTrue() {
+    public void whenStartWithLongerPrefixThenFalse() {
         ArrayChar word = new ArrayChar("Mother");
         boolean result = word.startWith("Motherfucker");
-        assertThat(result, is(true));
+        assertThat(result, is(false));
     }
 
     @Test
     public void whenEmptyPrefixThenTrue() {
         ArrayChar word = new ArrayChar("Motherfucker");
         boolean result = word.startWith("");
-        assertThat(result, is(true));
+        assertThat(result, is(false));
     }
 
     @Test
     public void whenEmptyStringThenTrue() {
         ArrayChar word = new ArrayChar("");
         boolean result = word.startWith("Motherfucker");
-        assertThat(result, is(true));
+        assertThat(result, is(false));
     }
-
-    @Test
-    public void allEmptyThenTrue() {
-        ArrayChar word = new ArrayChar("");
-        boolean result = word.startWith("");
-        assertThat(result, is(true));
-    }
-
 }
