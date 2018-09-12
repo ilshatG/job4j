@@ -11,8 +11,7 @@ public class CheckTest {
         Check check = new Check();
         boolean[] input = new boolean[] {true, true, true, true, true};
         boolean result = check.mono(input);
-        boolean expect = true;
-        assertThat(result, is(expect));
+        assertThat(result, is(true));
     }
 
     @Test
@@ -20,16 +19,14 @@ public class CheckTest {
         Check check = new Check();
         boolean[] input = new boolean[] {false, false, false, false, false};
         boolean result = check.mono(input);
-        boolean expect = true;
-        assertThat(result, is(expect));
+        assertThat(result, is(true));
     }
     @Test
     public void whenArrayHas4FalseAnd1TrueThenFalse() {
         Check check = new Check();
         boolean[] input = new boolean[] {false, true, false, false, false};
         boolean result = check.mono(input);
-        boolean expect = false;
-        assertThat(result, is(expect));
+        assertThat(result, is(false));
     }
 
     @Test
@@ -37,8 +34,7 @@ public class CheckTest {
         Check check = new Check();
         boolean[] input = new boolean[] {true, true, true, false};
         boolean result = check.mono(input);
-        boolean expect = false;
-        assertThat(result, is(expect));
+        assertThat(result, is(false));
     }
 
     @Test
@@ -46,16 +42,14 @@ public class CheckTest {
         Check check = new Check();
         boolean[] input = new boolean[] {true};
         boolean result = check.mono(input);
-        boolean expect = true;
-        assertThat(result, is(expect));
+        assertThat(result, is(true));
     }
     @Test
     public void whenArrayHas1FalseThenTrue() {
         Check check = new Check();
         boolean[] input = new boolean[] {false};
         boolean result = check.mono(input);
-        boolean expect = true;
-        assertThat(result, is(expect));
+        assertThat(result, is(true));
     }
 
 

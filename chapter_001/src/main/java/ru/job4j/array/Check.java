@@ -15,21 +15,15 @@ public class Check {
      * @since 0.1
      */
     public boolean mono(boolean[] data) {
-        //посчитаю все true и false в массиве. Если то, или иное будет равно 0 в конечном итоге, то все члены равны.
-        int trueCount = 0; //счетчик всех true
-        int falseCount = 0; //счетчик всех fale
+        boolean result = true;
+        boolean firstValue = data[0];
         for (boolean value: data) {
-            if (value) {
-                trueCount++;
-            } else {
-                falseCount++;
-            }
-            //досрочный выход из цикла если, в процессе перебора пошло смешение true и false. Для ускорения работы метода
-            if (trueCount * falseCount != 0) {
+            if (value != firstValue) {
+                result = false;
                 break;
             }
         }
-        return trueCount * falseCount == 0;
+        return result;
     }
 
 }
