@@ -17,40 +17,19 @@ public class MatrixCheck {
      * @since 0.1
      */
     public boolean mono(boolean[][] data) {
-        //проверяю левую диагональ
-        int trueCount = 0; //счетчик всех true
-        int falseCount = 0; //счетчик всех fale
-        for (int count = 0; count < data.length; count++) {
-            if (data[count][count]) {
-                trueCount++;
-            } else {
-                falseCount++;
-            }
-            //досрочный выход из цикла, если в процессе перебора пошло смешение true и false. Для ускорения работы метода
-            if (trueCount * falseCount != 0) {
+
+        int size = data.length;
+        boolean firstLeft = data[0][0];
+        boolean firstRight = data[0][size - 1];
+        boolean result = true;
+
+        for (int index = 0; index < size; index++) {
+            if (data[index][index] != firstLeft
+                    || data[size - index - 1][size - index - 1] != firstRight) {
+                result = false;
                 break;
             }
         }
-        if (trueCount * falseCount != 0) {
-            //то дальше и проверять не следует - уходим
-            return false;
-        }
-
-        //проверяю правую диагональ
-        trueCount = 0; //счетчик всех true
-        falseCount = 0; //счетчик всех fale
-        for (int count = 0; count < data.length; count++) {
-            if (data[count][data.length - count - 1]) {
-                trueCount++;
-            } else {
-                falseCount++;
-            }
-            //досрочный выход из цикла, если в процессе перебора пошло смешение true и false. Для ускорения работы метода
-            if (trueCount * falseCount != 0) {
-                break;
-            }
-        }
-
-        return trueCount * falseCount == 0;
+        return result;
     }
 }
