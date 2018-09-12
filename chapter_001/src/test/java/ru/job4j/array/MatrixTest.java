@@ -36,8 +36,5 @@ public class MatrixTest {
         int[][] expect = {};
         assertThat(table, is(expect));
     }
-
-
-
 }
 

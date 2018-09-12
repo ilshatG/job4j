@@ -1,5 +1,4 @@
 package ru.job4j.array;
-
 /**
  * Объект данного классна создается для реализации матрицы и заполнения ее таблицей умножения.
  * @author Ilshat Gaifutdinov
@@ -7,7 +6,6 @@ package ru.job4j.array;
  * @since 0.1
  */
 public class Matrix {
-
     /**
      * Заполнение матрицы таблицей умножения.
      * @param size размер матрицы.

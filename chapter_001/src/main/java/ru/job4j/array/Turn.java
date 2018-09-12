@@ -21,6 +21,6 @@ public class Turn {
             array[index] = array[array.length - index - 1];
             array[array.length - index - 1] = temp;
         }
-    return array;
+        return array;
     }
 }

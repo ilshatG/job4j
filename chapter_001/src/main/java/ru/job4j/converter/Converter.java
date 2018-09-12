@@ -6,8 +6,8 @@ package ru.job4j.converter;
 public class Converter {
 
 
-    private static int DOLLAR_PRICE = 60;
-	private static int EURO_PRICE = 70;
+    private final static int DOLLAR_PRICE = 60;
+	private final static int EURO_PRICE = 70;
 
     /**
      * Конвертируем рубли в евро.
