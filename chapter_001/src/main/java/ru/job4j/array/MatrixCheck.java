@@ -25,7 +25,7 @@ public class MatrixCheck {
 
         for (int index = 0; index < size; index++) {
             if (data[index][index] != firstLeft
-                    || data[size - index - 1][size - index - 1] != firstRight) {
+                    || data[index][size - index - 1] != firstRight) {
                 result = false;
                 break;
             }
