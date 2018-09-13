@@ -21,14 +21,14 @@ public class Logic3T {
     }
 
     public boolean isWinnerO() {
-        return this.filledByY(0, 0, 1, 0)
-                || this.filledByY(0, 0, 0, 1)
-                || this.filledByY(0, 0, 1, 1)
-                || this.filledByY(2, 0, -1, 1)
-                || this.filledByY(0, 1, 1, 0)
-                || this.filledByY(0, 2, 1, 0)
-                || this.filledByY(1, 0, 0, 1)
-                || this.filledByY(2, 0, 0, 1);
+        return this.filledByO(0, 0, 1, 0)
+                || this.filledByO(0, 0, 0, 1)
+                || this.filledByO(0, 0, 1, 1)
+                || this.filledByO(2, 0, -1, 1)
+                || this.filledByO(0, 1, 1, 0)
+                || this.filledByO(0, 2, 1, 0)
+                || this.filledByO(1, 0, 0, 1)
+                || this.filledByO(2, 0, 0, 1);
     }
 /* с предикатами. оставлено на будущее
     public boolean isWinnerO() {
@@ -71,7 +71,7 @@ public class Logic3T {
         }
         return result;
     }
-    public boolean filledByY(int startX, int startY, int deltaX, int deltaY) {
+    public boolean filledByO(int startX, int startY, int deltaX, int deltaY) {
         boolean result = true;
         for (int index = 0; index != this.table.length; index++) {
             Figure3T cell = this.table[startX][startY];
