@@ -19,13 +19,13 @@ public class MatrixCheck {
     public boolean mono(boolean[][] data) {
 
         int size = data.length;
-        boolean firstLeft = data[0][0];
-        boolean firstRight = data[0][size - 1];
+        boolean left = data[0][0];
+        boolean right = data[0][size - 1];
         boolean result = true;
 
         for (int index = 0; index < size; index++) {
-            if (data[index][index] != firstLeft
-                    || data[index][size - index - 1] != firstRight) {
+            if (data[index][index] != left
+                    || data[index][size - index - 1] != right) {
                 result = false;
                 break;
             }

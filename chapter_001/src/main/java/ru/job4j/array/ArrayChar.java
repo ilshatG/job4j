@@ -9,7 +9,6 @@ public class ArrayChar {
     public ArrayChar(String line) {
         this.data = line.toCharArray();
     }
-
     /**
      * Проверяет. что слово начинается с префикса.
      * @param prefix префикс.
@@ -20,11 +19,9 @@ public class ArrayChar {
     public boolean startWith(String prefix) {
         boolean result = true;
         char[] value = prefix.toCharArray();
-
         if (value.length > data.length || value.length == 0) {
             return false;
         }
-
         for (int index = 0; index < value.length; index++) {
             if (data[index] != value[index]) {
                 result = false;

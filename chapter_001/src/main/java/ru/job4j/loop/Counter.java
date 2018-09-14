@@ -20,10 +20,10 @@ public class Counter {
      * @return сумма четных чисел.
      */
     public int add(int start, int finish) {
-        int sumOfEvenNumbers = 0;
-        for (int arrayIndex = start; arrayIndex <= finish; arrayIndex++) {
-            sumOfEvenNumbers += values[arrayIndex] % 2 == 0 ? values[arrayIndex] : 0;
+        int sum = 0;
+        for (int index = start; index <= finish; index++) {
+            sum += values[index] % 2 == 0 ? values[index] : 0;
         }
-        return sumOfEvenNumbers;
+        return sum;
     }
 }

@@ -8,7 +8,6 @@ package ru.job4j.array;
  * @since 0.1
  */
 public class Turn {
-
     /**
      * @param array массив целых чисел.
      * @return перевернутый массив.

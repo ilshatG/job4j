@@ -44,8 +44,8 @@ public class Logic3T {
 */
     public boolean hasGap() {
         boolean result = false;
-        for (Figure3T[] figure3T:table) {
-            for (Figure3T cell:figure3T) {
+        for (Figure3T[] figure:table) {
+            for (Figure3T cell:figure) {
                 if (!(cell.hasMarkX() || cell.hasMarkO())) {
                     result = true;
                     break;
@@ -71,6 +71,7 @@ public class Logic3T {
         }
         return result;
     }
+
     public boolean filledByO(int startX, int startY, int deltaX, int deltaY) {
         boolean result = true;
         for (int index = 0; index != this.table.length; index++) {

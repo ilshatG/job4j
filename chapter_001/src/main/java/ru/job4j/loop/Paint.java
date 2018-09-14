@@ -56,4 +56,3 @@ public class Paint {
             return screen.toString();
         }
     }
-

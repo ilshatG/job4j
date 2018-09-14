@@ -8,7 +8,6 @@ package ru.job4j.calculate;
 * @version 0.1
 */
 public class Calculate {
-	
 	/**
 	* main
 	* С данного метода начинается выполнение программы.
@@ -18,7 +17,6 @@ public class Calculate {
 	public static void main(String[] args) {
 		System.out.println("Hello new brave world!");
 	}
-
 	/**
 	* Method echo.
 	* @param name Your name.
