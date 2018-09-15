@@ -44,7 +44,7 @@ public class Logic3T {
 */
     public boolean hasGap() {
         boolean result = false;
-        for (Figure3T[] figure:table) {
+        for (Figure3T[] figure : table) {
             for (Figure3T cell:figure) {
                 if (!(cell.hasMarkX() || cell.hasMarkO())) {
                     result = true;
