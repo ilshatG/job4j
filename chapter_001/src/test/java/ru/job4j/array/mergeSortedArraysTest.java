@@ -31,6 +31,4 @@ public class mergeSortedArraysTest {
         int[] expect = {1, 3, 7, 14, 15, 20, 30, 40, 50};
         assertThat(result, is(expect));
     }
-
-
 }
