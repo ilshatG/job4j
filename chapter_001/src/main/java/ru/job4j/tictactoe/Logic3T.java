@@ -10,25 +10,25 @@ public class Logic3T {
     }
 
     public boolean isWinnerX() {
-        return this.filledByX(0, 0, 1, 0)
-                || this.filledByX(0, 0, 0, 1)
-                || this.filledByX(0, 0, 1, 1)
-                || this.filledByX(2, 0, -1, 1)
-                || this.filledByX(0, 1, 1, 0)
-                || this.filledByX(0, 2, 1, 0)
-                || this.filledByX(1, 0, 0, 1)
-                || this.filledByX(2, 0, 0, 1);
+        return this.filledBy(true, 0, 0, 1, 0)
+                || this.filledBy(true, 0, 0, 0, 1)
+                || this.filledBy(true, 0, 0, 1, 1)
+                || this.filledBy(true, table.length-1, 0, -1, 1)
+                || this.filledBy(true, 0, 1, 1, 0)
+                || this.filledBy(true, 0, table.length-1, 1, 0)
+                || this.filledBy(true, 1, 0, 0, 1)
+                || this.filledBy(true, table.length-1, 0, 0, 1);
     }
 
     public boolean isWinnerO() {
-        return this.filledByO(0, 0, 1, 0)
-                || this.filledByO(0, 0, 0, 1)
-                || this.filledByO(0, 0, 1, 1)
-                || this.filledByO(2, 0, -1, 1)
-                || this.filledByO(0, 1, 1, 0)
-                || this.filledByO(0, 2, 1, 0)
-                || this.filledByO(1, 0, 0, 1)
-                || this.filledByO(2, 0, 0, 1);
+        return this.filledBy(false, 0, 0, 1, 0)
+                || this.filledBy(false, 0, 0, 0, 1)
+                || this.filledBy(false, 0, 0, 1, 1)
+                || this.filledBy(false, table.length-1, 0, -1, 1)
+                || this.filledBy(false, 0, 1, 1, 0)
+                || this.filledBy(false, 0, table.length-1, 1, 0)
+                || this.filledBy(false, 1, 0, 0, 1)
+                || this.filledBy(false, table.length-1, 0, 0, 1);
     }
 /* с предикатами. оставлено на будущее
     public boolean isWinnerO() {
@@ -58,13 +58,21 @@ public class Logic3T {
         return result;
     }
 
-    public boolean filledByX(int startX, int startY, int deltaX, int deltaY) {
+    //boolean xOrOchecking для проверки X, если true, иначе O проверяем
+    public boolean filledBy(boolean xOrOchecking, int startX, int startY, int deltaX, int deltaY) {
         boolean result = true;
         for (int index = 0; index != this.table.length; index++) {
-            Figure3T cell = this.table[startX][startY];
-            if (!this.table[startX][startY].hasMarkX()) {
-                result = false;
-                break;
+            Figure3T cell = this.table[startY][startX];
+            if (xOrOchecking) {
+                if (!cell.hasMarkX()) {
+                    result = false;
+                    break;
+                }
+            } else {
+                if (!cell.hasMarkO()) {
+                    result = false;
+                    break;
+                }
             }
             startX += deltaX;
             startY += deltaY;
@@ -72,19 +80,6 @@ public class Logic3T {
         return result;
     }
 
-    public boolean filledByO(int startX, int startY, int deltaX, int deltaY) {
-        boolean result = true;
-        for (int index = 0; index != this.table.length; index++) {
-            Figure3T cell = this.table[startX][startY];
-            if (!this.table[startX][startY].hasMarkO()) {
-                result = false;
-                break;
-            }
-            startX += deltaX;
-            startY += deltaY;
-        }
-        return result;
-    }
 
     /* С предикатом. Оставлено на будущее
     public boolean fillBy(Predicate<Figure3T> predicate, int startX, int startY, int deltaX, int deltaY) {
