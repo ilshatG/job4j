@@ -6,7 +6,7 @@ package ru.job4j.array;
  * @version 0.1
  * @since 0.1
  */
-public class mergeSortedArrays {
+public class MergeSortedArrays {
     /**
      * Соединение двух отсортированных массивов в один отсортированный.
      * @param array1 - исходный отсортированный массив целых чисел.
@@ -19,11 +19,11 @@ public class mergeSortedArrays {
         int[] result = new int[array1.length + array2.length];
         int index1 = array1.length - 1;
         int index2 = array2.length - 1;
-        for (int i = array1.length + array2.length -1; i >= 0; i--) {
+        for (int i = array1.length + array2.length - 1; i >= 0; i--) {
             if ((index1 >= 0 ? array1[index1] : 0) > (index2 >= 0 ? array2[index2] : 0)) {
-                result[i] = index1 >= 0 ? array1[index1--] : array1[0];
+                result[i] = array1[index1--];
             } else {
-                result[i] = index2 >= 0 ? array2[index2--] :  array2[0];
+                result[i] = array2[index2--];
             }
         }
         return result;
