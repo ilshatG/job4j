@@ -17,8 +17,8 @@ public class Tracker {
     private int position = 0;
 
     /**
-     * Метод реализаущий добавление заявки в хранилище
-     * @param item новая заявка
+     * Метод реализаущий добавление заявки в хранилище.
+     * @param item новая заявка.
      */
     public Item add(Item item) {
         item.setId(this.generateId());
@@ -27,9 +27,9 @@ public class Tracker {
     }
 
     /**
-     * Метод реализаущий редактирование заявки
-     * @param item новая заявка
-     * @param id идентификационный номер заявки
+     * Метод реализаущий редактирование заявки.
+     * @param item новая заявка.
+     * @param id идентификационный номер заявки.
      */
     public void replace(String id, Item item) {
         for (int index = 0; index < items.length - 1; index++) {
@@ -42,8 +42,8 @@ public class Tracker {
     }
 
     /**
-     * Метод реализаущий удаление заявки
-     * @param id идентификационный номер заявки
+     * Метод реализаущий удаление заявки.
+     * @param id идентификационный номер заявки.
      */
     public void delete(String id) {
         int index = 0;
@@ -66,7 +66,7 @@ public class Tracker {
     }
 
     /**
-     * Метод реализаущий получение заявок по имени
+     * Метод реализаущий получение заявок по имени.
      * @param key имя в заявке
      * @return массив со всеми заявками, удовлетворяющих условию по равенству имени
      */
@@ -82,7 +82,7 @@ public class Tracker {
     }
 
     /**
-     * Метод реализаущий получение заявки по имени
+     * Метод реализаущий получение заявки по имени.
      * @return заявк
      */
     public Item findById(String id) {
@@ -98,12 +98,21 @@ public class Tracker {
 
     /**
      *
-     * @param index номер заявки в списке
+     * @param index номер заявки в списке.
      * @return заявка
      */
     public Item getItem(int index) {
         return items[index];
     }
+
+    /**
+     * Возвращает список всех заявок.
+     * @return массив заявок.
+     */
+    Item[] getAll() {
+        return items;
+    }
+
     /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
