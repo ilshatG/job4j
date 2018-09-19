@@ -17,6 +17,18 @@ public class TrackerTest {
     }
 
     @Test
+    public void whenSuccessfullReplaceThenReturnTrue() {
+        Tracker tracker = new Tracker();
+        Item previous = new Item("test1", "testDescription", "123");
+        tracker.add(previous);
+        Item next = new Item("test2", "testDescription2", "1234");
+        next.setId(previous.getId());
+
+        assertThat(tracker.replace(previous.getId(), next), is(true));
+    }
+
+
+    @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
         Item previous = new Item("test1", "testDescription", "123");
@@ -45,14 +57,44 @@ public class TrackerTest {
     }
 
     @Test
-    public void findByName() {
+    public void whenDeleteFoundItemThenTrue() {
+        Tracker tracker = new Tracker();
+        tracker.add(new Item("item1", "desc", ""));
+        Item item = new Item("item2", "desc", "");
+        tracker.add(item);
+        tracker.add(new Item("item3", "desc", ""));
+        String id = item.getId();
+
+        assertThat(tracker.delete(id), is(true));
+    }
+
+    @Test
+    public void wenHasOneNameFindItemOfName() {
         Tracker tracker = new Tracker();
         tracker.add(new Item("item1", "description1", ""));
         Item item = new Item("item2", "desc", "");
         tracker.add(item);
         tracker.add(new Item("item3", "description3", ""));
-        Item[] items = new Item[100];
+        Item[] items = new Item[1];
         items[0] = item;
         assertThat(tracker.findByName("item2"), is(items));
     }
+
+    @Test
+    public void wenHasTwoNamesFindTwoItemsByNames() {
+        Tracker tracker = new Tracker();
+        tracker.add(new Item("item1", "description1", ""));
+        Item item = new Item("item2", "desc", "");
+        tracker.add(item);
+        Item item2 = new Item("item2", "description for item2", "");
+        tracker.add(item2);
+        tracker.add(new Item("item3", "description3", ""));
+        tracker.add(new Item("item4", "description4", ""));
+        Item[] items = new Item[2];
+        items[0] = item;
+        items[1] = item2;
+
+        assertThat(tracker.findByName("item2"), is(items));
+    }
+
 }

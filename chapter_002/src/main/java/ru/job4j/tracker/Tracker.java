@@ -27,34 +27,42 @@ public class Tracker {
     }
 
     /**
-     * Метод реализаущий редактирование заявки.
+     * Метод реализаущий замену заявки.
      * @param item новая заявка.
-     * @param id идентификационный номер заявки.
+     * @param id идентификационный номер искомой заявки.
+     * @return true если успешно
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         for (int index = 0; index < items.length - 1; index++) {
             if (items[index].getId().equals(id)) {
+                result = true;
                 items[index] = item;
                 items[index].setId(id);
                 break;
             }
         }
+        return result;
     }
 
     /**
      * Метод реализаущий удаление заявки.
      * @param id идентификационный номер заявки.
+     * @return true если успешно
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         int index = 0;
         for (Item element : this.items) {
             if (element.getId().equals(id)) {
+                result = true;
                 System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
                 this.items[this.items.length - 1] = null;
                 break;
             }
             index++;
         }
+        return result;
     }
 
     /**
@@ -71,13 +79,15 @@ public class Tracker {
      * @return массив со всеми заявками, удовлетворяющих условию по равенству имени
      */
     public Item[] findByName(String key) {
-        Item[] result = new Item[100];
+        Item[] temp = new Item[100];
         int index = 0;
         for (Item element : this.items) {
             if (element != null && element.getName().equals(key)) {
-                result[index++] = element;
+                temp[index++] = element;
             }
         }
+        Item[] result = new Item[index];
+        System.arraycopy(temp, 0, result, 0, index);
         return result;
     }
 
