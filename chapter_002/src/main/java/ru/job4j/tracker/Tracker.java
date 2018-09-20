@@ -67,10 +67,20 @@ public class Tracker {
 
     /**
      * Метод реализаущий получение всех заявок
-     * @return массив со всеми заявками
+     * @return массив со всеми заявками без пустых элементов
      */
     public Item[] findAll() {
-        return items;
+        Item[] temp = new Item[100];
+        int index = 0;
+        for (Item element : this.items) {
+            if (element != null) {
+                temp[index++] = element;
+            }
+        }
+        Item[] result = new Item[index];
+        System.arraycopy(temp, 0, result, 0, index);
+        return result;
+
     }
 
     /**
@@ -129,7 +139,6 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        //Реализовать метод генерации.
         return Math.round(Math.random() * 1000) + "" + System.currentTimeMillis();
     }
 }
