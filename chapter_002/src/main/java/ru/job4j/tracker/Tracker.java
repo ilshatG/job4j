@@ -35,7 +35,7 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         for (int index = 0; index < items.length - 1; index++) {
-            if (items[index].getId().equals(id)) {
+            if (item != null && items[index].getId().equals(id)) {
                 result = true;
                 items[index] = item;
                 items[index].setId(id);
@@ -54,7 +54,7 @@ public class Tracker {
         boolean result = false;
         int index = 0;
         for (Item element : this.items) {
-            if (element.getId().equals(id)) {
+            if (element != null && element.getId().equals(id)) {
                 result = true;
                 System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
                 this.items[this.items.length - 1] = null;
@@ -139,6 +139,6 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        return Math.round(Math.random() * 1000) + "" + System.currentTimeMillis();
+        return Math.round(Math.random() * 1000) + ""; // + System.currentTimeMillis();
     }
 }

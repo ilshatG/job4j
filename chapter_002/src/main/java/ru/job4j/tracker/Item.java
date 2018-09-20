@@ -18,6 +18,11 @@ public class Item {
         this.desc = desc;
     }
 
+    @Override
+    public String toString() {
+        return this.getId() + "\t\t" + this.getName() + "\t\t" + this.getDescription();
+    }
+
     public String getName() {
         return name;
     }
