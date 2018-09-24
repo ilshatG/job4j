@@ -139,6 +139,6 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        return Math.round(Math.random() * 1000) + ""; // + System.currentTimeMillis();
+        return Math.round(Math.random() * 1000) + "" + System.currentTimeMillis();
     }
 }

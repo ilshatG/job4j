@@ -1,10 +1,15 @@
 package ru.job4j.tracker;
 
-import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.junit.After;
+import org.junit.Before;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.StringJoiner;
 
-import static org.junit.Assert.*;
 
 public class TrackerTest {
 
