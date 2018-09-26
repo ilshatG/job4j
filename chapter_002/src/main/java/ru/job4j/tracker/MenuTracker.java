@@ -74,14 +74,14 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions.add(new AddItem(0, "Добавить новую заявку"));
         this.actions.add(new ShowItems(1, "Показать все заявки"));
         this.actions.add(new MenuTracker.EditItem(2, "Редактировать заявку"));
         this.actions.add(new MenuTracker.DeleteItem(3, "Удалить заявку"));
         this.actions.add(new FindItemById(4, "Найти заявку по Id"));
         this.actions.add(new FindItemsByName(5, "Найти заявки по имени"));
-        this.actions.add(new ExitProgram(6, "Выйти из программы"));
+        this.actions.add(new ExitProgram(6, "Выйти из программы", ui));
     }
 
     /**
@@ -268,10 +268,12 @@ public class MenuTracker {
     class ExitProgram implements UserAction {
         private int key;
         private String info;
+        private final StartUI ui;
 
-        ExitProgram(int key, String info) {
+        ExitProgram(int key, String info, StartUI ui) {
             this.key = key;
             this.info = info;
+            this.ui = ui;
         }
 
         @Override
@@ -286,7 +288,7 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            exit(0);
+            ui.stop();
         }
     }
 }
