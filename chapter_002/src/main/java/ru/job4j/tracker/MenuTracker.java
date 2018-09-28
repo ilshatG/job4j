@@ -5,23 +5,10 @@ import java.util.List;
 
 import static java.lang.System.exit;
 
-class FindItemById implements UserAction {
-    private int key;
-    private String info;
+class FindItemById extends BaseAction {
 
     FindItemById(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    @Override
-    public int key() {
-        return this.key;
-    }
-
-    @Override
-    public String info() {
-        return this.info;
+        super(key, info);
     }
 
     @Override
@@ -99,28 +86,15 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.key() + ". " + action.info());
+                System.out.println(action.info());
             }
         }
     }
 
-    class AddItem implements UserAction {
-        private int key;
-        private String info;
+    class AddItem extends BaseAction {
 
         AddItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
-        public String info() {
-            return this.info;
+            super(key, info);
         }
 
         @Override
@@ -135,23 +109,10 @@ public class MenuTracker {
         }
     }
 
-    class ShowItems implements UserAction {
-        private int key;
-        private String info;
+    class ShowItems extends BaseAction {
 
         ShowItems(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
-        public String info() {
-            return this.info;
+            super(key, info);
         }
 
         @Override
@@ -164,23 +125,10 @@ public class MenuTracker {
         }
     }
 
-    static class EditItem implements UserAction {
-        private int key;
-        private String info;
+    static class EditItem extends BaseAction {
 
         EditItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
-        public String info() {
-            return this.info;
+            super(key, info);
         }
 
         @Override
@@ -198,23 +146,10 @@ public class MenuTracker {
         }
     }
 
-    static class DeleteItem implements UserAction {
-        private int key;
-        private String info;
+    static class DeleteItem extends BaseAction {
 
         DeleteItem(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
-        public String info() {
-            return this.info;
+            super(key, info);
         }
 
         @Override
@@ -229,23 +164,10 @@ public class MenuTracker {
         }
     }
 
-    class FindItemsByName implements UserAction {
-        private int key;
-        private String info;
+    class FindItemsByName extends BaseAction {
 
         FindItemsByName(int key, String info) {
-            this.key = key;
-            this.info = info;
-        }
-
-        @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
-        public String info() {
-            return this.info;
+            super(key, info);
         }
 
         @Override
@@ -265,25 +187,12 @@ public class MenuTracker {
         }
     }
 
-    class ExitProgram implements UserAction {
-        private int key;
-        private String info;
+    class ExitProgram extends BaseAction {
         private final StartUI ui;
 
         ExitProgram(int key, String info, StartUI ui) {
-            this.key = key;
-            this.info = info;
+            super(key, info);
             this.ui = ui;
-        }
-
-        @Override
-        public int key() {
-            return this.key;
-        }
-
-        @Override
-        public String info() {
-            return this.info;
         }
 
         @Override
