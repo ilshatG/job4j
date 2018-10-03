@@ -12,8 +12,8 @@ public class Bishop extends Figure {
             throw new ImpossibleMoveException("impossible move");
         }
         Cell[] steps = new Cell[Math.abs(source.x - dest.x)];
-        int deltaX = (source.x - dest.x) <= 0 ? 1 : -1;
-        int deltaY = (source.y - dest.y) <= 0 ? 1 : -1;
+        int deltaX = Integer.compare(dest.x, source.x);
+        int deltaY = Integer.compare(dest.y, source.y);
         for (int index = 0; index  < Math.abs(source.x - dest.x); index++) {
             steps[index] = Cell.valueOf((char) ('A' + source.x + index * deltaX + deltaX) + "" + (source.y + index * deltaY + 1 + deltaY));
         }
