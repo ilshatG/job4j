@@ -16,17 +16,26 @@ public class PriorityQueue {
             tasks.add(0, task);
         } else {
             int index = 0;
+            boolean added = false;
             for (Task element : tasks) {
                 if (element.getPriority() >= task.getPriority()) {
                     tasks.add(index, task);
+                    added = true;
                     break;
                 }
                 index++;
+            }
+            if (!added) {
+                tasks.addLast(task);
             }
         }
     }
 
     public Task take() {
         return this.tasks.poll();
+    }
+
+    public LinkedList<Task> getList() {
+        return this.tasks;
     }
 }
