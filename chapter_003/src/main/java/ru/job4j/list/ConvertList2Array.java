@@ -10,7 +10,7 @@ public class ConvertList2Array {
         for (int[] row : array) {
             int i = 0;
             for (int column : row) {
-                if (list.size() > index ) {
+                if (list.size() > index) {
                     row[i++] = list.get(index++);
                 } else {
                     break;
