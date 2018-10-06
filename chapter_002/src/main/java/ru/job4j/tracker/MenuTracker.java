@@ -86,7 +86,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                System.out.print(action.info() + System.lineSeparator());
             }
         }
     }

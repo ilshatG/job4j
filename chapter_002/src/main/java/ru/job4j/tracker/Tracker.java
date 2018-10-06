@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
+import java.util.ArrayList;
 import java.util.Date.*;
+import java.util.List;
 
 /**
  * @version $Id$
@@ -9,7 +11,7 @@ public class Tracker {
     /**
      * Массив для хранения заявок.
      */
-    private final Item[] items = new Item[100];
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Указатель ячейки для новой заявки.
@@ -22,7 +24,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -34,11 +36,11 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for (int index = 0; index < items.length - 1; index++) {
-            if (item != null && items[index] != null && items[index].getId().equals(id)) {
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                item.setId(id);
+                items.set(index, item);
                 result = true;
-                items[index] = item;
-                items[index].setId(id);
                 break;
             }
         }
@@ -52,15 +54,13 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        int index = 0;
-        for (Item element : this.items) {
-            if (element != null && element.getId().equals(id)) {
+
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                items.remove(index);
                 result = true;
-                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - index - 1);
-                this.items[this.items.length - 1] = null;
                 break;
             }
-            index++;
         }
         return result;
     }
@@ -69,17 +69,8 @@ public class Tracker {
      * Метод реализаущий получение всех заявок
      * @return массив со всеми заявками без пустых элементов
      */
-    public Item[] findAll() {
-        Item[] temp = new Item[100];
-        int index = 0;
-        for (Item element : this.items) {
-            if (element != null) {
-                temp[index++] = element;
-            }
-        }
-        Item[] result = new Item[index];
-        System.arraycopy(temp, 0, result, 0, index);
-        return result;
+    public List<Item> findAll() {
+        return this.items;
 
     }
 
@@ -88,17 +79,14 @@ public class Tracker {
      * @param key имя в заявке
      * @return массив со всеми заявками, удовлетворяющих условию по равенству имени
      */
-    public Item[] findByName(String key) {
-        Item[] temp = new Item[100];
-        int index = 0;
-        for (Item element : this.items) {
-            if (element != null && element.getName().equals(key)) {
-                temp[index++] = element;
+    public List<Item> findByName(String key) {
+        List<Item> temp = new ArrayList<>();
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getName().equals(key)) {
+                temp.add(items.get(index));
             }
         }
-        Item[] result = new Item[index];
-        System.arraycopy(temp, 0, result, 0, index);
-        return result;
+        return temp;
     }
 
     /**
@@ -122,14 +110,14 @@ public class Tracker {
      * @return заявка
      */
     public Item getItem(int index) {
-        return items[index];
+        return items.get(index);
     }
 
     /**
      * Возвращает список всех заявок.
      * @return массив заявок.
      */
-    Item[] getAll() {
+    List<Item> getAll() {
         return items;
     }
 

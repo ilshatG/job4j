@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 
@@ -80,8 +82,8 @@ public class TrackerTest {
         Item item = new Item("item2", "desc", "");
         tracker.add(item);
         tracker.add(new Item("item3", "description3", ""));
-        Item[] items = new Item[1];
-        items[0] = item;
+        List<Item> items = new ArrayList<>();
+        items.add(item);
         assertThat(tracker.findByName("item2"), is(items));
     }
 
@@ -95,10 +97,9 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(new Item("item3", "description3", ""));
         tracker.add(new Item("item4", "description4", ""));
-        Item[] items = new Item[2];
-        items[0] = item;
-        items[1] = item2;
-
+        List<Item> items = new ArrayList<>();
+        items.add(item);
+        items.add(item2);
         assertThat(tracker.findByName("item2"), is(items));
     }
 
