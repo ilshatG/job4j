@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class mergeSortedArraysTest {
+public class MergeSortedArraysTest {
     @Test
     public void whenMergeArraysOfEqualSizesThenGetSortedArray() {
         int[] array1 = {1, 2, 3, 4, 5};
