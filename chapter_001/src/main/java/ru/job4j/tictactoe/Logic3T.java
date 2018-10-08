@@ -13,22 +13,22 @@ public class Logic3T {
         return this.filledBy(true, 0, 0, 1, 0)
                 || this.filledBy(true, 0, 0, 0, 1)
                 || this.filledBy(true, 0, 0, 1, 1)
-                || this.filledBy(true, table.length-1, 0, -1, 1)
+                || this.filledBy(true, table.length - 1, 0, -1, 1)
                 || this.filledBy(true, 0, 1, 1, 0)
-                || this.filledBy(true, 0, table.length-1, 1, 0)
+                || this.filledBy(true, 0, table.length - 1, 1, 0)
                 || this.filledBy(true, 1, 0, 0, 1)
-                || this.filledBy(true, table.length-1, 0, 0, 1);
+                || this.filledBy(true, table.length - 1, 0, 0, 1);
     }
 
     public boolean isWinnerO() {
         return this.filledBy(false, 0, 0, 1, 0)
                 || this.filledBy(false, 0, 0, 0, 1)
                 || this.filledBy(false, 0, 0, 1, 1)
-                || this.filledBy(false, table.length-1, 0, -1, 1)
+                || this.filledBy(false, table.length - 1, 0, -1, 1)
                 || this.filledBy(false, 0, 1, 1, 0)
-                || this.filledBy(false, 0, table.length-1, 1, 0)
+                || this.filledBy(false, 0, table.length - 1, 1, 0)
                 || this.filledBy(false, 1, 0, 0, 1)
-                || this.filledBy(false, table.length-1, 0, 0, 1);
+                || this.filledBy(false, table.length - 1, 0, 0, 1);
     }
 /* с предикатами. оставлено на будущее
     public boolean isWinnerO() {
