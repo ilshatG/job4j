@@ -48,29 +48,26 @@ public class Banking {
         return result;
     }
 
-    int getAccountIndex(String requisite, String passport) {
-        List<Account> srcAccounts = getUserAccounts(passport);
-        int index = -1;
-        for (int i = 0; i < srcAccounts.size(); i++) {
-            if (srcAccounts.get(i).getRequisites().equals(requisite)) {
-                index = i;
+    Account getAccount(String requisite, String passport) {
+        List<Account> accounts = getUserAccounts(passport);
+        Account result = null;
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getRequisites().equals(requisite)) {
+                result = accounts.get(i);
                 break;
             }
         }
-        return index;
+        return result;
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
         boolean result = false;
-        int srcIndex = getAccountIndex(srcRequisite, srcPassport);
-        int destIndex = getAccountIndex(dstRequisite, destPassport);
-        if (srcIndex != -1 && destIndex != -1) {
-            Account srcAccaunt = getUserAccounts(srcPassport).get(srcIndex);
-            Account destAccaunt = getUserAccounts(destPassport).get(destIndex);
-            if (srcAccaunt.getValue() >= amount) {
-                srcAccaunt.setValue(srcAccaunt.getValue() - amount);
-                destAccaunt.setValue(destAccaunt.getValue() + amount);
-            }
+        Account src = getAccount(srcRequisite, srcPassport);
+        Account dest = getAccount(dstRequisite, destPassport);
+        if (src != null && dest != null && src.getValue() >= amount) {
+                src.setValue(src.getValue() - amount);
+                dest.setValue(dest.getValue() + amount);
+                result = true;
         }
         return result;
     }
