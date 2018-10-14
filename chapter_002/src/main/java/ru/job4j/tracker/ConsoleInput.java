@@ -1,11 +1,21 @@
 package ru.job4j.tracker;
 import java.util.*;
+import java.util.function.Consumer;
 
 public class ConsoleInput implements Input {
     private Scanner scanner = new Scanner(System.in);
+    Consumer write;
+
+    public ConsoleInput() {
+        write = (s) -> System.out.println(s);
+    }
+
+    public ConsoleInput(Consumer write) {
+        this.write = write;
+    }
 
     public String ask(String question) {
-        System.out.println(question);
+        write.accept(question);
         return scanner.next();
     }
 
