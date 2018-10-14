@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.Date.*;
 import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 /**
  * @version $Id$
@@ -13,10 +15,13 @@ public class Tracker {
      */
     private List<Item> items = new ArrayList<>();
 
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private BiPredicate<Integer, String> conditionId = (index, id) -> {
+        return items.get(index).getId().equals(id);
+    };
+
+    private BiPredicate<Integer, String> conditionName = (index, id) -> {
+        return items.get(index).getName().equals(id);
+    };
 
     /**
      * Метод реализаущий добавление заявки в хранилище.
@@ -37,7 +42,7 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         for (int index = 0; index < items.size(); index++) {
-            if (items.get(index).getId().equals(id)) {
+                if (conditionId.test(index, id)) {
                 item.setId(id);
                 items.set(index, item);
                 result = true;
@@ -54,9 +59,8 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-
         for (int index = 0; index < items.size(); index++) {
-            if (items.get(index).getId().equals(id)) {
+                if (conditionId.test(index, id)) {
                 items.remove(index);
                 result = true;
                 break;
@@ -82,7 +86,7 @@ public class Tracker {
     public List<Item> findByName(String key) {
         List<Item> temp = new ArrayList<>();
         for (int index = 0; index < items.size(); index++) {
-            if (items.get(index).getName().equals(key)) {
+                if (conditionName.test(index, key)) {
                 temp.add(items.get(index));
             }
         }
