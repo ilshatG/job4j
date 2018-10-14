@@ -4,6 +4,9 @@ package ru.job4j.chess;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
+
 /**
  *
  * @version $Id$
@@ -41,8 +44,9 @@ public class Board {
 
     private int findBy(Cell cell) {
         int rst = -1;
+        Predicate<Integer> predicate = (index) -> this.figures[index] != null && this.figures[index].position().equals(cell);
         for (int index = 0; index != this.figures.length; index++) {
-            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
+            if (predicate.test(index)) {
                 rst = index;
                 break;
             }
