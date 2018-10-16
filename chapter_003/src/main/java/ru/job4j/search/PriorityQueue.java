@@ -1,25 +1,19 @@
 package ru.job4j.search;
 
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
 
     /**
      * Метод должен вставлять в нужную позицию элемент.
-     * Позиция определять по полю приоритет.
-     * Для вставик использовать add(int index, E value)
      * @param task задача
      */
     public void put(Task task) {
-            int index = 0;
-            for (Task element : tasks) {
-                if (element.getPriority() >= task.getPriority()) {
-                    break;
-                }
-                index++;
-            }
-            tasks.add(index, task);
+            tasks.add(task);
+            tasks = tasks.stream().sorted((o1, o2) -> o1.getPriority() - o2.getPriority())
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     public Task take() {

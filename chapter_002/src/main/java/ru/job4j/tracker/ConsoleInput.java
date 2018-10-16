@@ -16,7 +16,7 @@ public class ConsoleInput implements Input {
 
     public String ask(String question) {
         write.accept(question);
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     @Override
