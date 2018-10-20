@@ -9,9 +9,6 @@ public class IventIt implements Iterator {
 
     public IventIt(int[] values) {
         this.values = values;
-        if (values.length > 0 && values[0] % 2 != 0) {
-            index = nextEven();
-        }
     }
 
     @Override
@@ -23,6 +20,9 @@ public class IventIt implements Iterator {
     public Object next() {
         if (index >= values.length) {
             throw new NoSuchElementException();
+        }
+        if (values[index] % 2 != 0) {
+            index = nextEven();
         }
         int result = values[index];
         index = nextEven();
