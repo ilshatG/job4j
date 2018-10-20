@@ -8,20 +8,21 @@ public class Converter {
             Iterator<Integer> iterator = it.next();
             @Override
             public boolean hasNext() {
+                changeIteratorIfNesessary();
                 return iterator.hasNext();
             }
 
             @Override
             public Integer next() {
                 Integer result = 0;
-                changeIteratorIfNesesery();
+                changeIteratorIfNesessary();
                 result = iterator.next();
-                changeIteratorIfNesesery();
+                changeIteratorIfNesessary();
                 return result;
             }
 
-            void changeIteratorIfNesesery() {
-                if (!iterator.hasNext() && it.hasNext()) {
+            void changeIteratorIfNesessary() {
+                while (!iterator.hasNext() && it.hasNext()) {
                     iterator = it.next();
                 }
                 return;
