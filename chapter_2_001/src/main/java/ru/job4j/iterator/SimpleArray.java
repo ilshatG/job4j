@@ -29,7 +29,7 @@ public class SimpleArray<T> implements Iterable<T> {
         }
     }
 
-    T get(int index) {
+    public T get(int index) {
         return values[index];
     }
 
