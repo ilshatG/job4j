@@ -1,7 +1,7 @@
 package ru.job4j.jeneric;
 
 public class Role extends Base {
-    String description;
+    private String description;
     Role(String id) {
         super(id);
     }

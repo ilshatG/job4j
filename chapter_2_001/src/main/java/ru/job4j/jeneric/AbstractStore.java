@@ -3,7 +3,7 @@ package ru.job4j.jeneric;
 import ru.job4j.iterator.SimpleArray;
 
 public class AbstractStore<T extends Base> implements Store<T> {
-    SimpleArray<T> values;
+    private SimpleArray<T> values;
 
     public AbstractStore(int size) {
         values = new SimpleArray<>(size);
