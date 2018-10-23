@@ -1,5 +1,7 @@
 package ru.job4j.list;
 
+import java.util.NoSuchElementException;
+
 public class SimpleArrayList<T> {
     private int size;
     private Node<T> first;
@@ -20,13 +22,16 @@ public class SimpleArrayList<T> {
     public T delete() {
         this.first = this.first.next;
         size--;
-        return first.data;
+        return first != null ? first.data : null;
     }
 
     /**
      * Метод получения элемента по индексу.
      */
     public T get(int index) {
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
         Node<T> result = this.first;
         for (int i = 0; i < index; i++) {
             result = result.next;
