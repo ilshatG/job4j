@@ -20,6 +20,14 @@ public class SimpleStack<T> {
         }
         T result = values.get(0);
         values.delete();
+        count--;
         return result;
+    }
+
+    private int getSize() {
+        return count;
+    }
+    public boolean empty() {
+        return count == 0;
     }
 }
