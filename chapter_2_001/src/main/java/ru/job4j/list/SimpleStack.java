@@ -27,6 +27,7 @@ public class SimpleStack<T> {
     private int getSize() {
         return count;
     }
+
     public boolean empty() {
         return count == 0;
     }
