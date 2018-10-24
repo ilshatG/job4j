@@ -4,9 +4,9 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListContainer<T> implements Iterable {
-    SimpleArrayList<T> values = new SimpleArrayList<>();
-    int modCount = 0;
+public class LinkedListContainer<T> implements Iterable<T> {
+    private SimpleArrayList<T> values = new SimpleArrayList<>();
+    private int modCount = 0;
 
     public void add(T value) {
         values.add(value);
@@ -24,8 +24,8 @@ public class LinkedListContainer<T> implements Iterable {
     @Override
     public Iterator iterator() {
         return new Iterator<T>() {
-            int expectedModCount = modCount;
-            int index = 0;
+            private int expectedModCount = modCount;
+            private int index = 0;
 
             @Override
             public boolean hasNext() {

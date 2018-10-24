@@ -3,8 +3,8 @@ package ru.job4j.list;
 import java.util.NoSuchElementException;
 
 public class SimpleStack<T> {
-    SimpleArrayList<T> values;
-    int count = 0;
+    private SimpleArrayList<T> values;
+    private int count = 0;
     SimpleStack() {
         values = new SimpleArrayList<T>();
     }
