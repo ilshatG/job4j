@@ -20,10 +20,11 @@ public class GrowableList<T> implements Iterable<T> {
         container = (T[]) new Object[size];
     }
 
-    public void add(T item) {
+    public boolean add(T item) {
         needForArraySizeIncrease();
         container[index++] = item;
         modCount++;
+        return true;
     }
 
     T get(int index) {
