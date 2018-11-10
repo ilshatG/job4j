@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class GrowableList<T> implements Iterable<T> {
-    private final static int INITIAL_ARRAY_SIZE = 3;
-    private final static int INCREASING_ARRAY_STEP = 3;
+    private final static int INITIAL_ARRAY_SIZE = 10;
+    private final static int INCREASING_ARRAY_STEP = 10;
     private T[] container;
     private int index = 0;
     private int modCount = 0;
@@ -27,11 +27,15 @@ public class GrowableList<T> implements Iterable<T> {
         return true;
     }
 
-    T get(int index) {
+    public T get(int index) {
         if (index > this.index || index < 0) {
             throw new NoSuchElementException();
         }
         return container[index];
+    }
+
+    public int getSize() {
+        return index;
     }
 
     private void needForArraySizeIncrease() {
