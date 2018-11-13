@@ -46,6 +46,10 @@ public class SimpleBlockingQueue<T> {
         return result;
     }
 
+    public synchronized int size() {
+        return queue.size();
+    }
+
     public static void main(String[] args) {
         SimpleBlockingQueue queue = new SimpleBlockingQueue();
         new Thread(new Producer(queue)).start();
