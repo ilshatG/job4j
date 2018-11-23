@@ -1,0 +1,48 @@
+INSERT INTO user_roles (name) VALUES ('Admin');
+INSERT INTO user_roles (name) VALUES ('User');
+INSERT INTO user_roles (name) VALUES ('Buyer');
+
+INSERT INTO user_permissions (name) VALUES ('Search');
+INSERT INTO user_permissions (name) VALUES ('Copy');
+INSERT INTO user_permissions (name) VALUES ('Update');
+
+INSERT INTO role_permissions (role_id, user_permission_id) VALUES (1,1);
+INSERT INTO role_permissions (role_id, user_permission_id) VALUES (1,2);
+INSERT INTO role_permissions (role_id, user_permission_id) VALUES (1,3);
+INSERT INTO role_permissions (role_id, user_permission_id) VALUES (2,1);
+INSERT INTO role_permissions (role_id, user_permission_id) VALUES (2,2);
+INSERT INTO role_permissions (role_id, user_permission_id) VALUES (3,1);
+
+INSERT INTO users (name, user_role_id) VALUES ('Makarov',1);
+INSERT INTO users (name, user_role_id) VALUES ('Vanin',2);
+INSERT INTO users (name, user_role_id) VALUES ('Kulakov',2);
+INSERT INTO users (name, user_role_id) VALUES ('Vahitov',3);
+INSERT INTO users (name, user_role_id) VALUES ('Praslov',3);
+
+INSERT INTO order_states (name) VALUES ('Created');
+INSERT INTO order_states (name) VALUES ('Pending');
+INSERT INTO order_states (name) VALUES ('In process');
+INSERT INTO order_states (name) VALUES ('Closed');
+
+INSERT INTO order_categories (name) VALUES ('Problem');
+INSERT INTO order_categories (name) VALUES ('Task');
+
+INSERT INTO orders (name, description, create_date, user_id, categorie_id,
+	state_id) VALUES ( 'Task from admin', 'Desc1', current_timestamp, 1, 2, 1);
+INSERT INTO orders (name, description, create_date, user_id, categorie_id,
+	state_id) VALUES ('Bug from admin', 'Desc2', current_timestamp, 1, 1, 2);
+INSERT INTO orders (name, description, create_date, user_id, categorie_id,
+	state_id) VALUES ('Task from seller', 'Desc3', current_timestamp, 2, 2, 3);
+INSERT INTO orders (name, description, create_date, user_id, categorie_id,
+	state_id) VALUES ('Bug from buyer', 'Desc4', current_timestamp, 3, 1, 4);
+
+INSERT INTO attachs (name, content, order_id) VALUES ('Task', NULL, 1);
+INSERT INTO attachs (name, content, order_id) VALUES ('Data', NULL, 1);
+INSERT INTO attachs (name, content, order_id) VALUES ('Description', NULL, 2);
+INSERT INTO attachs (name, content, order_id) VALUES ('Seller_task', NULL, 3);
+
+INSERT INTO comments (name, create_date, order_id) VALUES ('Achtung', current_timestamp, 1);
+INSERT INTO comments (name, create_date, order_id) VALUES ('Cant make task', current_timestamp, 1);
+INSERT INTO comments (name, create_date, order_id) VALUES ('Common seller task.', current_timestamp, 3);
+INSERT INTO comments (name, create_date, order_id) VALUES ('Must be fixed.', current_timestamp, 2);
+INSERT INTO comments (name, create_date, order_id) VALUES ('Must be fixed.', current_timestamp, 4);
