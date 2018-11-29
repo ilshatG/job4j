@@ -1,17 +1,20 @@
 package ru.job4j.tracker;
 
+import java.util.Objects;
+
 public class Item {
+    private String id;
     private String name;
     private String desc;
-    private String id;
-    private long created;
-    private String[] comments;
+    //private long created;
+    //private String[] comments;
 
     Item(String name, String desc, String id) {
         this.name = name;
         this.desc = desc;
         this.id = id;
     }
+
 
     Item(String name, String desc) {
         this.name = name;
@@ -45,5 +48,20 @@ public class Item {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(id, item.id) &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(desc, item.desc);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, desc);
     }
 }

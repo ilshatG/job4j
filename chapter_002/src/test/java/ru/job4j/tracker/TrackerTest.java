@@ -102,5 +102,4 @@ public class TrackerTest {
         items.add(item2);
         assertThat(tracker.findByName("item2"), is(items));
     }
-
 }
