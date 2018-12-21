@@ -25,11 +25,14 @@ public class UserServlet extends HttpServlet {
                 + "    <title>Title</title>\n"
                 + "</head>\n"
                 + "<body>\n"
+                + "<p>This is a user list:</p>"
                 + "\n"
         );
 
+        int counter = 1;
         for (User user: items) {
-            writer.append(user.getId() + " " + user.getName() + "\n\r");
+            writer.append("<b>" + counter++ + ". </b>" + "<b>id:</b> " + user.getId() + "\t <b>name: </b>" + user.getName() + "\t <b>login: </b>" + user.getLogin()
+                    + "\t <b>email: </b>" + user.getEmail() + "<br>\n\r");
         }
         writer.append("</body>\n"
                 + "</html>");
@@ -42,7 +45,10 @@ public class UserServlet extends HttpServlet {
         String action = req.getParameter("action");
         String id = req.getParameter("id");
         String user = req.getParameter("user");
-        dispatch.doAction(action, new User(Integer.parseInt(id), user, "", "", ""));
+        String login = req.getParameter("login");
+        String email = req.getParameter("email");
+        String createDate = req.getParameter("createDate");
+        dispatch.doAction(action, new User(Integer.parseInt(id), user, login, email, createDate));
         doGet(req, resp);
     }
 }
