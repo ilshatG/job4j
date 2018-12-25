@@ -27,13 +27,28 @@ public class UserServlet extends HttpServlet {
                 + "<body>\n"
                 + "<p>This is a user list:</p>"
                 + "\n"
+                + "<table border = '1'><th>N</th> <th>Id</th>"
+                + "<th>Name</th> <th>login</th> <th>e-mail</th> <th>action</th>"
         );
 
         int counter = 1;
         for (User user: items) {
-            writer.append("<b>" + counter++ + ". </b>" + "<b>id:</b> " + user.getId() + "\t <b>name: </b>" + user.getName() + "\t <b>login: </b>" + user.getLogin()
-                    + "\t <b>email: </b>" + user.getEmail() + "<br>\n\r");
+            writer.append("<tr><td>" + counter++ + ". </td>" + "<td>" + user.getId() + "</td> <td>" + user.getName() + "</td> <td>" + user.getLogin()
+                    + "</td><td>" + user.getEmail() + "</td> <td>"
+                    + "<form action ='"+ req.getContextPath() +"/list' name ='form' method='post'> "
+                    + "<input type = 'submit' name ='action'"  + " value = 'delete id=" + user.getId() + "'/>"
+                    + "<a href = '"+ req.getContextPath()+"/create?name=" + user.getName() + "&login=" + user.getLogin()
+                    + "&email=" + user.getEmail()
+                    + "&createDate=" + user.getCreateDate()
+                    + "&id=" + user.getId()
+                    + "&action=update"
+                    + "'> <input type = 'button' name ='action'"  + " value='edit'/></a>"
+                    + "</form> "
+                    + "</td>"
+                    + "</tr>\n\r");
         }
+        writer.append("</table><br>\n");
+        writer.append("<a href='/UserServlet/create?name=&login=&email=&createDate=&action=add'/>Add new user</a>\n");
         writer.append("</body>\n"
                 + "</html>");
         writer.flush();
@@ -41,14 +56,27 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //create user, update user, remove user
         String action = req.getParameter("action");
-        String id = req.getParameter("id");
-        String user = req.getParameter("user");
+        String id = "";
+        String name = req.getParameter("user");
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         String createDate = req.getParameter("createDate");
-        dispatch.doAction(action, new User(Integer.parseInt(id), user, login, email, createDate));
+        User user = new User(name, login, email, createDate);;
+        if (action.contains("delete")) {
+            id = action.substring(10);
+            action="delete";
+            user = new User(Integer.parseInt(id), "", "", "", "");
+        }
+        if (action.contains("update")) {
+            id = action.substring(10);
+            action="update";
+            user = new User(Integer.parseInt(id), name, login, email, createDate);
+        }
+
+        if(action != null) {
+            dispatch.doAction(action, user);
+        }
         doGet(req, resp);
     }
 }

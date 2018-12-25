@@ -34,10 +34,17 @@ public class DispatchPattern {
         };
     }
 
+    public Function<User, Boolean> doNothing() {
+        return user -> {
+            return false;
+        };
+    }
+
     public DispatchPattern init() {
         this.load("add", this.addUser());
         this.load("delete", this.deleteUser());
         this.load("update", this.updateUser());
+        this.load("cancel", this.doNothing());
         return this;
     }
 

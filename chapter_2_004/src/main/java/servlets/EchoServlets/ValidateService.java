@@ -42,15 +42,16 @@ public class ValidateService {
     }
 
     private boolean validateUser(User user) {
-        if(user.getName().equals("") || user.getId() == 0 || user.getEmail().equals("") || user.getLogin().equals("")
+        if(user.getName().equals("") || user.getEmail().equals("") || user.getLogin().equals("")
                 || user.getCreateDate().equals("") || user.getCreateDate().equals("")) {
             return false;
         }
-
         List<User> users = getAll();
         for (User record:users) {
-            if (record.getEmail().equals(user.getEmail()) || record.getLogin().equals(user.getLogin())) {
-                return false;
+            if (record.getId() != user.getId()) {
+                if ((record.getEmail().equals(user.getEmail()) || record.getLogin().equals(user.getLogin()))) {
+                    return false;
+                }
             }
         }
         return true;

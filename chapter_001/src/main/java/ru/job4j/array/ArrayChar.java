@@ -30,4 +30,17 @@ public class ArrayChar {
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        String action ="delete id=12345";
+        String id ="";
+        if (action.contains("delete")) {
+            id = action.substring(10, action.length());
+            action="delete";
+            //user = new User(Integer.parseInt(id), name, login, email, createDate);
+            System.out.println(action);
+            System.out.println(id);
+        }
+
+    }
 }

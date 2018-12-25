@@ -3,6 +3,7 @@ package servlets.EchoServlets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -12,7 +13,7 @@ public class MemoryStore implements Store {
 
     private MemoryStore() {
         items = new ConcurrentHashMap();
-        //add(new User(1, "test", "test", "test@test", "1/1/2019"));
+        testData();
     }
 
     public static MemoryStore getInstance() {
@@ -71,4 +72,11 @@ public class MemoryStore implements Store {
         }
         return result;
     }
+
+    private void testData() {
+        add(new User(1, "Ivanov", "ivashka11", "ivashka778@test@ru", "01/1/2019"));
+        add(new User(2, "Petrashko", "petrashka421", "petrashka@test.com", "05/1/2019"));
+        add(new User(3, "Pjerow", "perov143", "perov@test.ru", "03/2/2019"));
+    }
+
 }

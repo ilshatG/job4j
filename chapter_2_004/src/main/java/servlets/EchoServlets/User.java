@@ -1,6 +1,7 @@
 package servlets.EchoServlets;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class User {
     private int id;
@@ -11,6 +12,15 @@ public class User {
 
     public User(int id, String name, String login, String email, String createDate) {
         this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+    }
+
+    public User(String name, String login, String email, String createDate) {
+        Random rand = new Random();
+        this.id = rand.nextInt(10000) + 1;
         this.name = name;
         this.login = login;
         this.email = email;
