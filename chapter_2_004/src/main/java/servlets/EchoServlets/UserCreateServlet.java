@@ -15,12 +15,12 @@ public class UserCreateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String email = req.getParameter("email");
-        String createDate = req.getParameter("createDate");
-        String action = req.getParameter("action");
-        String id = req.getParameter("id");
+        String name = antiNull(req.getParameter("name"));
+        String login = antiNull(req.getParameter("login"));
+        String email = antiNull(req.getParameter("email"));
+        String createDate = antiNull(req.getParameter("createDate"));
+        String action = antiNull(req.getParameter("action")) =="" ? "add" : req.getParameter("action");
+        String id = antiNull(req.getParameter("id"));
                 writer.append("<!DOCTYPE html>\n"
                 + "<html lang=\"en\">\n"
                 + "<head>\n"
@@ -57,5 +57,9 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher rd = req.getRequestDispatcher("/list");
         rd.forward(req, resp);
+    }
+
+    private String antiNull(String value) {
+        return value == null ? "" : value;
     }
 }
