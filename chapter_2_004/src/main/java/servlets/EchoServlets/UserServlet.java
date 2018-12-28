@@ -14,8 +14,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //должен отдавать всех пользователей в системе
-        resp.setContentType("text/html");
+        //оставлю на потом для примера, когда позабуду, как делается
+        /*resp.setContentType("text/html");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         List<User> items = logic.getAll();
         writer.append("<!DOCTYPE html>\n"
@@ -51,7 +51,7 @@ public class UserServlet extends HttpServlet {
         writer.append("<a href='/UserServlet/create?name=&login=&email=&createDate=&action=add'/>Add new user</a>\n");
         writer.append("</body>\n"
                 + "</html>");
-        writer.flush();
+        writer.flush();*/
     }
 
     @Override
@@ -77,6 +77,7 @@ public class UserServlet extends HttpServlet {
         if(action != null) {
             dispatch.doAction(action, user);
         }
-        doGet(req, resp);
+        //doGet(req, resp);
+        resp.sendRedirect("index.jsp");
     }
 }
