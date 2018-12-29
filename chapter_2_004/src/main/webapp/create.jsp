@@ -35,6 +35,6 @@
         &nbsp
         <input type='submit' name='action' value='cancel'/>
     </form>
-    <p> id: <%= Objects.toString(request.getParameter("id"),"") %></p>
+    <p>id: <%=request.getParameter("id")%></p>
 </body>
 </html>

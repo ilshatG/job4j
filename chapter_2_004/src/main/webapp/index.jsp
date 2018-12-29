@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello Buddy!</h1>
-        <h2>This is a fucking beautiful users list:</h2>
+        <h2>This fucking beautiful users list powered by postgres:</h2>
         <table border = '1'>
             <th>N</th>
             <th>Id</th>

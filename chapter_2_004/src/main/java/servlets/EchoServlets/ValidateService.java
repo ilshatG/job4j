@@ -5,7 +5,7 @@ import java.util.List;
 //Logic Layout
 public class ValidateService {
     private static volatile ValidateService instance;
-    private final Store persistence = MemoryStore.getInstance();
+    private final Store persistence = DBStore.getInstance();    //MemoryStore.getInstance();
 
     private ValidateService() {
 
@@ -29,7 +29,7 @@ public class ValidateService {
 
     public void update(User user) {
         if(validateUser(user)) {
-            persistence.add(user);
+            persistence.update(user);
         }
     }
 
@@ -43,7 +43,7 @@ public class ValidateService {
 
     private boolean validateUser(User user) {
         if(user.getName().equals("") || user.getEmail().equals("") || user.getLogin().equals("")
-                || user.getCreateDate().equals("") || user.getCreateDate().equals("")) {
+                || user.getCreateDate().equals("")) {
             return false;
         }
         List<User> users = getAll();
