@@ -3,27 +3,36 @@ package servlets.EchoServlets;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.xml.transform.Source;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class DBStore implements Store {
+public class DBStore implements Store, AutoCloseable {
         private static final BasicDataSource SOURCE = new BasicDataSource();
         private static DBStore INSTANCE = new DBStore();
         private static final String TABLE = "users";
 
         private DBStore() {
-            SOURCE.setUrl("jdbc:postgresql://127.0.0.1:5432/postgres");
-            SOURCE.setUsername("postgres");
-            SOURCE.setPassword("519977");
-            SOURCE.setDriverClassName("org.postgresql.Driver");
-            SOURCE.setMinIdle(25);
-            SOURCE.setMaxIdle(30);
-            SOURCE.setMaxOpenPreparedStatements(200);
+            Properties config = new Properties();
+            try (InputStream in = DBStore.class.getClassLoader().getResourceAsStream("app.properties")) {
+                config.load(in);
+                SOURCE.setUrl(config.getProperty("url"));
+                SOURCE.setUsername(config.getProperty("username"));
+                SOURCE.setPassword(config.getProperty("password"));
+                SOURCE.setDriverClassName(config.getProperty("driver-class-name"));
+                SOURCE.setMinIdle(25);
+                SOURCE.setMaxIdle(30);
+                SOURCE.setMaxOpenPreparedStatements(200);
 
-            if (!isTableExist()) {
-                createTable();
+                if (!isTableExist()) {
+                    createTable();
+                }
+
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
             }
         }
 
@@ -34,7 +43,6 @@ public class DBStore implements Store {
         @Override
         public void add(User user) {
             try (Connection connection = SOURCE.getConnection();
-                             //Statement st = connection.prepareStatement("...")
                  PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE + " (name, login, email, createDate) VALUES(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)
             ) {
                 ps.setString(1, user.getName());
@@ -127,5 +135,9 @@ public class DBStore implements Store {
             return result;
         }
 
+    @Override
+    public void close() throws Exception {
+        SOURCE.close();
     }
+}
 
