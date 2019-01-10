@@ -14,7 +14,7 @@ public class DBStore implements Store, AutoCloseable {
         private static final BasicDataSource SOURCE = new BasicDataSource();
         private static DBStore INSTANCE = new DBStore();
         private static final String TABLE = "users";
-
+//
         private DBStore() {
             Properties config = new Properties();
             try (InputStream in = DBStore.class.getClassLoader().getResourceAsStream("app.properties")) {
