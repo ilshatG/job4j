@@ -12,6 +12,11 @@ public class ParallelSearch {
                 () -> {
                     while (true) {
                             System.out.println(queue.poll());
+                            System.out.println("interrupt status " + Thread.currentThread().isInterrupted()) ;
+                            if (Thread.currentThread().isInterrupted()) {
+                                //Thread.currentThread().notify();
+                                break;
+                            }
                     }
                 }
         );

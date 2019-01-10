@@ -1,17 +1,45 @@
 package ru.job4j.threads.wait;
 import org.junit.Test;
 
-import static java.lang.System.exit;
+import java.util.Arrays;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.IntStream;
+
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class SimpleBlockingQueueTest {
     @Test
-    public void whenProduceThenonsume() throws InterruptedException {
-        SimpleBlockingQueue queue = new SimpleBlockingQueue();
-        Thread produce = new Thread(new Producer(queue));
-        Thread consume = new Thread(new Consumer(queue));
-        produce.start();
-        consume.start();
+    public void whenFetchAllThenGetIt() throws InterruptedException {
+        final CopyOnWriteArrayList<Integer> buffer = new CopyOnWriteArrayList<>();
+        final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
+        Thread producer = new Thread(
+                () -> {
+                    //IntStream.range(0, 5).forEach(queue::offer);
+                    for (int i = 0; i < 5; i++) {
+                        queue.offer(i);
+                    }
+
+                }
+        );
+        producer.start();
+
+        Thread consumer = new Thread(
+                () -> {
+                    while (!(queue.size() == 0) || !Thread.currentThread().isInterrupted()) {
+                        //try {
+                            buffer.add(queue.poll());
+                        /*} catch (InterruptedException e) {
+                            e.printStackTrace();
+                            Thread.currentThread().interrupt();
+                        }*/
+                    }
+                }
+        );
+        consumer.start();
+        producer.join();
+        consumer.interrupt();
+        consumer.join();
+        assertThat(buffer, is(Arrays.asList(0, 1, 2, 3, 4)));
     }
 }

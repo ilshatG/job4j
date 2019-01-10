@@ -6,6 +6,8 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static java.lang.System.exit;
+
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
 
@@ -18,6 +20,7 @@ public class SimpleBlockingQueue<T> {
         boolean result = false;
         while (this.queue.size() >= LIMIT) {
             try {
+                System.out.println("offer wait");
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -28,14 +31,19 @@ public class SimpleBlockingQueue<T> {
         }
         queue.offer(value);
         System.out.println("offer: " + value);
+        notify();
     }
 
     public synchronized T poll() {
         while (this.queue.size() == 0) {
             try {
+                System.out.println("wait poll");
                 wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                System.out.println("breaking");
+                Thread.currentThread().interrupt();
+                //exit(0);
             }
         }
         if (queue.size() < LIMIT ) {

@@ -1,4 +1,15 @@
 <web-app>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>servlets.EchoServlets.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+
     <servlet>
         <servlet-name>User View Servlet</servlet-name>
         <servlet-class>servlets.EchoServlets.UsersController</servlet-class>
@@ -20,4 +31,16 @@
         <servlet-name>UserCreateServlet</servlet-name>
         <url-pattern>/create</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Signin</servlet-name>
+        <servlet-class>servlets.EchoServlets.SigninController</servlet-class>
+
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Signin</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
 </web-app>
