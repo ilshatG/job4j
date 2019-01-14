@@ -1,5 +1,5 @@
 package ru.job4j.chess;
-
+/*
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -177,3 +177,4 @@ public class Chess extends Application {
         return rst;
     }
 }
+*/

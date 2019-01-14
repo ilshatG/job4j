@@ -1,5 +1,5 @@
 package ru.job4j.threads.pingpong;
-
+/*
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -26,3 +26,4 @@ public class PingPong extends Application {
         stage.show();
     }
 }
+*/

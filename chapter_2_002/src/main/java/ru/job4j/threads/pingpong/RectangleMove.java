@@ -1,5 +1,5 @@
 package ru.job4j.threads.pingpong;
-
+/*
 import javafx.scene.shape.Rectangle;
 
 public class RectangleMove implements Runnable {
@@ -44,4 +44,4 @@ public class RectangleMove implements Runnable {
     private boolean isBumped() {
         return (this.rect.getX() > bounds.getWidth()) || (this.rect.getX() < 0) || (this.rect.getY() > bounds.getHeight()) || (this.rect.getY() < 0);
     }
-}
+}*/
