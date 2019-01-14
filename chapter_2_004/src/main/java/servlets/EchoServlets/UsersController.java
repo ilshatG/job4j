@@ -15,6 +15,15 @@ public class UsersController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        synchronized (session){
+            if (session == null || session.getAttribute("user") == null) {
+                resp.sendRedirect(String.format("%s/signin", req.getContextPath()));
+            } else {
+                req.setAttribute("users", ValidateService.getInstance().getAll());
+                req.getRequestDispatcher("WEB-INF/views/usersListView.jsp").forward(req, resp);
+            }
+        }
     }
 
     @Override
@@ -25,16 +34,21 @@ public class UsersController extends HttpServlet {
         String login = req.getParameter("login");
         String email = req.getParameter("email");
         String createDate = req.getParameter("createDate");
-        User user = new User(name, login, email, createDate);;
+        String role = req.getParameter("role");
+        String password = req.getParameter("password");
+        User user = new User(0,name, login, email, createDate, role, password);
         if (action.contains("delete")) {
             id = action.substring(10);
             action="delete";
-            user = new User(Integer.parseInt(id), "", "", "", "");
+            user = new User(Integer.parseInt(id), "", "", "", "", "");
         }
         if (action.contains("update")) {
             id = action.substring(10);
-            action="update";
-            user = new User(Integer.parseInt(id), name, login, email, createDate);
+            action = "update";
+            if (role == null || role.equals("")) {
+                role = "guest";
+            }
+            user = new User(Integer.parseInt(id), name, login, email, createDate, role, password);
         }
 
         if(action != null) {

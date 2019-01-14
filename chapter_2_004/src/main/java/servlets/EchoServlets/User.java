@@ -9,6 +9,24 @@ public class User {
     private String login;
     private String email;
     private String createDate;
+    private String role;
+    private String password;
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public User(int id, String name, String login, String email, String createDate) {
         this.id = id;
@@ -25,6 +43,25 @@ public class User {
         this.login = login;
         this.email = email;
         this.createDate = createDate;
+    }
+
+    public User(int id, String name, String login, String email, String createDate, String role) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+        this.role = role;
+    }
+
+    public User(int id, String name, String login, String email, String createDate, String role, String password) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+        this.role = role;
+        this.password = password;
     }
 
     public int getId() {

@@ -79,4 +79,8 @@ public class MemoryStore implements Store {
         add(new User(3, "Pjerow", "perov143", "perov@test.ru", "03/2/2019"));
     }
 
+    @Override
+    public User currentUser(String login, String password) {
+        return null;
+    }
 }

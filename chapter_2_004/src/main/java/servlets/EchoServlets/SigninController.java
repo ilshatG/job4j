@@ -13,7 +13,7 @@ public class SigninController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/loginView.jsp").forward(req, resp);
     }
 
     @Override
@@ -21,10 +21,17 @@ public class SigninController extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        HttpSession session = req.getSession();
-        synchronized (session) {
-            session.setAttribute("login", login);
-            resp.sendRedirect(String.format("%s/", req.getContextPath()));
+        User user = ValidateService.getInstance().currentUser(login, password);
+        if (user != null) {
+            HttpSession session = req.getSession();
+            synchronized (session) {
+                session.setAttribute("user", user);
+                req.setAttribute("user", user);
+                resp.sendRedirect(String.format("%s/", req.getContextPath()));
+            }
+        } else {
+            req.setAttribute("error", "Credentional invalid");
+            doGet(req, resp);
         }
     }
 }

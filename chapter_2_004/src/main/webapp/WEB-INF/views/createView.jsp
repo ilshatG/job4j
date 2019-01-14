@@ -23,6 +23,16 @@
         <input type='text' name='email' value='<c:out value="${param.email}"/>'/><br><br>
         <label>date:</label>
         <input type='text' name='createDate' value='<c:out value="${param.createDate}"/>'/><br><br>
+        <label>role:</label>
+        <c:if test="${user.role == 'admin' || user.id == item.id}">
+            <select name="role">
+                <option value="admin">admin</option>
+                <option value="guest">guest</option>
+            </select>
+        </c:if>
+        <br><br>
+        <label>password:</label>
+        <input type='password' name='password' value='<c:out value="${param.password}"/>'/><br><br>
 
         <c:set var = "action" scope = "session" value = "add"/>
         <c:if test = "${param.action == 'update'}">

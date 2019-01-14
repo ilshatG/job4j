@@ -3,7 +3,7 @@ package servlets.EchoServlets;
 import java.util.List;
 
 //Logic Layout
-public class ValidateService {
+public class ValidateService implements Store{
     private static volatile ValidateService instance;
     private final Store persistence = DBStore.getInstance();    //MemoryStore.getInstance();
 
@@ -37,8 +37,23 @@ public class ValidateService {
         persistence.delete(user);
     }
 
+    @Override
+    public List<User> findAll(User user) {
+        return null;
+    }
+
+    @Override
+    public User findById(User user) {
+        return null;
+    }
+
     public List<User> getAll() {
         return persistence.getAll();
+    }
+
+    @Override
+    public User currentUser(String login, String password) {
+        return persistence.currentUser(login, password);
     }
 
     private boolean validateUser(User user) {

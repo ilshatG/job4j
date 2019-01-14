@@ -12,12 +12,13 @@
     <title>Title</title>
 </head>
 <body>
+<p>Use admin admin to log in as administrator.</p>
 <c:if test="${error != ''}">
     <div style="background-color: red">
         <c:out value="${error}"/>
     </div>
 </c:if>
-<form action="${pageContext.servletContext.contextPath}/signis" method = "post">
+<form action="${pageContext.servletContext.contextPath}/signin" method = "post">
         Login: <input type="text" name="login"><br/>
         Password: <input type="password" name="password"><br/>
         <input type="submit">

@@ -9,4 +9,6 @@ public interface Store {
     public List<User> findAll(User user);
     public User findById(User user);
     public List<User> getAll();
+    //public boolean isCredentional(String login, String password);
+    public User currentUser(String login, String password);
 }

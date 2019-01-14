@@ -29,6 +29,7 @@ public class DBStore implements Store, AutoCloseable {
 
                 if (!isTableExist()) {
                     createTable();
+                    add(new User(0, "admin", "admin", "admin@admin.ru", "01/01/2019", "admin", "admin"));
                 }
 
             } catch (Exception e) {
@@ -43,12 +44,15 @@ public class DBStore implements Store, AutoCloseable {
         @Override
         public void add(User user) {
             try (Connection connection = SOURCE.getConnection();
-                 PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE + " (name, login, email, createDate) VALUES(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)
+                 PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE + " (name, login, email, " +
+                         "createDate, role, password) VALUES(?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)
             ) {
                 ps.setString(1, user.getName());
                 ps.setString(2, user.getLogin());
                 ps.setString(3, user.getEmail());
                 ps.setString(4, user.getCreateDate());
+                ps.setString(5, user.getRole());
+                ps.setString(6, user.getPassword());
                 ps.executeUpdate();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -59,12 +63,14 @@ public class DBStore implements Store, AutoCloseable {
         @Override
         public void update(User user) {
             try (PreparedStatement ps = SOURCE.getConnection().prepareStatement("UPDATE " + TABLE + " SET name = ?, " +
-                    "login = ?, email = ?, createDate = ? where id = ?")) {
+                    "login = ?, email = ?, createDate = ?, role = ?, password = ? where id = ?")) {
                 ps.setString(1, user.getName());
                 ps.setString(2, user.getLogin());
                 ps.setString(3, user.getEmail());
                 ps.setString(4, user.getCreateDate());
-                ps.setInt(5, user.getId());
+                ps.setString(5, user.getRole());
+                ps.setString(6, user.getPassword());
+                ps.setInt(7, user.getId());
                 ps.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -100,7 +106,8 @@ public class DBStore implements Store, AutoCloseable {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     User user = new User(rs.getInt("id"), rs.getString("name"), rs.getString("login"),
-                            rs.getString("email"), rs.getString("createDate"));
+                            rs.getString("email"), rs.getString("createDate"), rs.getString("role"),
+                            rs.getString("password"));
                     result.add(user);
                 }
             } catch (SQLException e) {
@@ -125,7 +132,8 @@ public class DBStore implements Store, AutoCloseable {
         private boolean createTable() {
             boolean result = false;
             try (PreparedStatement ps = SOURCE.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + TABLE
-                    + " (id SERIAL PRIMARY KEY, name varchar(225), login varchar(225), email varchar(225), createDate varchar(225))")
+                    + " (id SERIAL PRIMARY KEY, name varchar(225), login varchar(225), email varchar(225), createDate varchar(225), role varchar(20), " +
+                    " password varchar(20))")
             ) {
                 ps.executeUpdate();
                 result = true;
@@ -138,6 +146,20 @@ public class DBStore implements Store, AutoCloseable {
     @Override
     public void close() throws Exception {
         SOURCE.close();
+    }
+
+
+    public User currentUser(String login, String password) {
+            User result = null;
+            for(User user : this.getAll()) {
+                String log = user.getLogin();
+                String pass = user.getPassword();
+                if(user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                    result = user;
+                    break;
+                }
+            }
+            return result;
     }
 }
 
