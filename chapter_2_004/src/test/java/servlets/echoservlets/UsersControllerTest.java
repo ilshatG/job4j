@@ -1,4 +1,4 @@
-package servlets.EchoServlets;
+package servlets.echoservlets;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +8,6 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,7 +25,7 @@ public class UsersControllerTest {
     public void addUser() throws ServletException, IOException {
         Store validate = new ValidateStub();
         PowerMockito.mockStatic(ValidateService.class);
-        Mockito.when(ValidateService.getInstance()).thenReturn((ValidateService)validate);
+        Mockito.when(ValidateService.getInstance()).thenReturn((ValidateService) validate);
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
         when(req.getParameter("name")).thenReturn("Petr Arsentev");

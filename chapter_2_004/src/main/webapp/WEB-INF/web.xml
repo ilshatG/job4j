@@ -1,7 +1,7 @@
 <web-app>
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>servlets.EchoServlets.AuthFilter</filter-class>
+        <filter-class>servlets.echoservlets.AuthFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -12,7 +12,7 @@
 
     <servlet>
         <servlet-name>User View Servlet</servlet-name>
-        <servlet-class>servlets.EchoServlets.UsersController</servlet-class>
+        <servlet-class>servlets.echoservlets.UsersController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>UserCreateServlet</servlet-name>
-        <servlet-class>servlets.EchoServlets.UserCreateServlet</servlet-class>
+        <servlet-class>servlets.echoservlets.UserCreateServlet</servlet-class>
 
     </servlet>
 
@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>Signin</servlet-name>
-        <servlet-class>servlets.EchoServlets.SigninController</servlet-class>
+        <servlet-class>servlets.echoservlets.SigninController</servlet-class>
 
     </servlet>
 

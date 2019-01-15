@@ -1,9 +1,9 @@
-package servlets.EchoServlets;
+package servlets.echoservlets;
 
 import java.util.List;
 
 //Logic Layout
-public class ValidateService implements Store{
+public class ValidateService implements Store {
     private static volatile ValidateService instance;
     private final Store persistence = DBStore.getInstance();    //MemoryStore.getInstance();
 
@@ -22,13 +22,13 @@ public class ValidateService implements Store{
     }
 
     public void add(User user) {
-        if(validateUser(user)) {
+        if (validateUser(user)) {
             persistence.add(user);
         }
     }
 
     public void update(User user) {
-        if(validateUser(user)) {
+        if (validateUser(user)) {
             persistence.update(user);
         }
     }
@@ -57,7 +57,7 @@ public class ValidateService implements Store{
     }
 
     private boolean validateUser(User user) {
-        if(user.getName().equals("") || user.getEmail().equals("") || user.getLogin().equals("")
+        if (user.getName().equals("") || user.getEmail().equals("") || user.getLogin().equals("")
                 || user.getCreateDate().equals("")) {
             return false;
         }

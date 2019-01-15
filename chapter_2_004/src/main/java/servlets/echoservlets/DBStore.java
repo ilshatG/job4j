@@ -1,18 +1,16 @@
-package servlets.EchoServlets;
+package servlets.echoservlets;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import javax.xml.transform.Source;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DBStore implements Store, AutoCloseable {
         private static final BasicDataSource SOURCE = new BasicDataSource();
-        private static DBStore INSTANCE = new DBStore();
+        private static DBStore instance = new DBStore();
         private static final String TABLE = "users";
 //
         private DBStore() {
@@ -38,14 +36,14 @@ public class DBStore implements Store, AutoCloseable {
         }
 
         public static DBStore getInstance() {
-            return INSTANCE;
+            return instance;
         }
 
         @Override
         public void add(User user) {
             try (Connection connection = SOURCE.getConnection();
-                 PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE + " (name, login, email, " +
-                         "createDate, role, password) VALUES(?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)
+                 PreparedStatement ps = connection.prepareStatement("INSERT INTO " + TABLE + " (name, login, email, "
+                         + "createDate, role, password) VALUES(?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)
             ) {
                 ps.setString(1, user.getName());
                 ps.setString(2, user.getLogin());
@@ -62,8 +60,8 @@ public class DBStore implements Store, AutoCloseable {
 
         @Override
         public void update(User user) {
-            try (PreparedStatement ps = SOURCE.getConnection().prepareStatement("UPDATE " + TABLE + " SET name = ?, " +
-                    "login = ?, email = ?, createDate = ?, role = ?, password = ? where id = ?")) {
+            try (PreparedStatement ps = SOURCE.getConnection().prepareStatement("UPDATE " + TABLE + " SET name = ?, "
+                    + "login = ?, email = ?, createDate = ?, role = ?, password = ? where id = ?")) {
                 ps.setString(1, user.getName());
                 ps.setString(2, user.getLogin());
                 ps.setString(3, user.getEmail());
@@ -132,8 +130,8 @@ public class DBStore implements Store, AutoCloseable {
         private boolean createTable() {
             boolean result = false;
             try (PreparedStatement ps = SOURCE.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS " + TABLE
-                    + " (id SERIAL PRIMARY KEY, name varchar(225), login varchar(225), email varchar(225), createDate varchar(225), role varchar(20), " +
-                    " password varchar(20))")
+                    + " (id SERIAL PRIMARY KEY, name varchar(225), login varchar(225), email varchar(225), createDate varchar(225), role varchar(20), "
+                    + " password varchar(20))")
             ) {
                 ps.executeUpdate();
                 result = true;
@@ -151,10 +149,10 @@ public class DBStore implements Store, AutoCloseable {
 
     public User currentUser(String login, String password) {
             User result = null;
-            for(User user : this.getAll()) {
+            for (User user : this.getAll()) {
                 String log = user.getLogin();
                 String pass = user.getPassword();
-                if(user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
                     result = user;
                     break;
                 }

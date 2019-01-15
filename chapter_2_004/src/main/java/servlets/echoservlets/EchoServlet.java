@@ -1,4 +1,4 @@
-package servlets.EchoServlets;
+package servlets.echoservlets;
 
 
 import javax.servlet.ServletException;

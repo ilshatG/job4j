@@ -1,4 +1,4 @@
-package servlets.EchoServlets;
+package servlets.echoservlets;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
 
-        if (request.getRequestURI().contains("/signin")){
+        if (request.getRequestURI().contains("/signin")) {
             chain.doFilter(req, resp);
         } else {
             HttpSession session = request.getSession();

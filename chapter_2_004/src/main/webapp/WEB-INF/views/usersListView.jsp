@@ -1,5 +1,5 @@
-<%@ page import="servlets.EchoServlets.User" %>
-<%@ page import="servlets.EchoServlets.ValidateService" %>
+<%@ page import="servlets.echoservlets.User" %>
+<%@ page import="servlets.echoservlets.ValidateService" %>
 <%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
