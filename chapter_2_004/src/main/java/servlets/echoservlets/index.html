@@ -19,13 +19,24 @@
                 alert("Заполните:\n\r" + errorText);
             }
         }
+        
+        function add() {
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var pol = $('#pol').val();
+            var desc = $('#desc').val();
+
+           //получаем ссылку на последний элемент в таблице.
+            //и после него добавляем html
+            $('#table tr:last').after('<tr><td>' + name + '</td><td>' + surname + '</td><td>' + pol + '</td><td>' + desc + '</td></tr>');
+        }
     </script>
 </head>
 <body>
 
 <div class="container-fluid">
-    <h1>My First Bootstrap Page</h1>
-    <p>This is some text.</p>
+    <h1>Excellent Page</h1>
+    <p>Job4j tutorial for front end.</p>
 
     <form action="/action_page.php" id="my-form">
         <div class="form-group">
@@ -48,38 +59,40 @@
             <textarea name="desc" class="form-control" id="desc" title="Описание"></textarea>
         </div>
         <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+        <button type="button" class="btn btn-default" onclick="return add();">Add</button>
     </form>
 
-    <table class="table">
+    <table class="table" id="table">
         <thead>
         <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Пол</th>
+            <th>Описание</th>
         </tr>
         </thead>
+
         <tbody>
         <tr>
             <td>John</td>
             <td>Doe</td>
-            <td>john@example.com</td>
+            <td>муж</td>
+            <td>Хороший человек</td>
         </tr>
         <tr>
             <td>Mary</td>
             <td>Moe</td>
-            <td>mary@example.com</td>
+            <td>баба</td>
+            <td>Дура конченная</td>
         </tr>
         <tr>
             <td>July</td>
             <td>Dooley</td>
-            <td>july@example.com</td>
+            <td>жен</td>
+            <td>Нормальная женщина так, ничего.</td>
         </tr>
         </tbody>
     </table>
-</div>
-
-
-    </form>
 </div>
 
 </body>
