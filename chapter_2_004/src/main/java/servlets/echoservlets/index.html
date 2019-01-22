@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var elements = document.getElementById("my-form").elements;
+            var errorText = "";
+            for (var i = 0, element; element = elements[i++];) {
+                if (element.type === "text" && element.value === "")
+                    errorText = errorText + "\t" + element.title + "\n\r"
+            }
+            if (errorText!="") {
+                alert("Заполните:\n\r" + errorText);
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -14,26 +27,27 @@
     <h1>My First Bootstrap Page</h1>
     <p>This is some text.</p>
 
-    <form action="/action_page.php">
+    <form action="/action_page.php" id="my-form">
         <div class="form-group">
             <label for="name">Имя:</label>
-            <input type="text" class="form-control" id="name">
+            <input type="text" class="form-control" id="name" title="Имя">
         </div>
 
         <div class="form-group">
             <label for="surname">Фамилия:</label>
-            <input type="text" class="form-control" id="surname">
+            <input type="text" class="form-control" id="surname" title="Фамилия">
         </div>
 
         <div class="form-group">
             <label for="pol">Пол:</label>
-            <input type="text" class="form-control" id="pol">
+            <input type="text" class="form-control" id="pol" title="Пол">
         </div>
 
         <div class="form-group">
             <label for="desc">Описание:</label>
-            <textarea name="desc" class="form-control" id="desc"></textarea>
+            <textarea name="desc" class="form-control" id="desc" title="Описание"></textarea>
         </div>
+        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
     </form>
 
     <table class="table">
