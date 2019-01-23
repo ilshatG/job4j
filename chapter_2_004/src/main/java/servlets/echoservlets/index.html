@@ -11,24 +11,37 @@
         function validate() {
             var elements = document.getElementById("my-form").elements;
             var errorText = "";
+            var result = true;
             for (var i = 0, element; element = elements[i++];) {
-                if (element.type === "text" && element.value === "")
+                if ((element.type === "text" || element.type=="textarea") && element.value === "")
                     errorText = errorText + "\t" + element.title + "\n\r"
             }
             if (errorText!="") {
                 alert("Заполните:\n\r" + errorText);
+                result = false;
             }
+            return result;
         }
         
         function add() {
-            var name = $('#name').val();
-            var surname = $('#surname').val();
-            var pol = $('#pol').val();
-            var desc = $('#desc').val();
+            if (validate()) {
+                var name = $('#name').val();
+                var surname = $('#surname').val();
+                var pol = $('#pol').val();
+                var desc = $('#desc').val();
 
-           //получаем ссылку на последний элемент в таблице.
-            //и после него добавляем html
-            $('#table tr:last').after('<tr><td>' + name + '</td><td>' + surname + '</td><td>' + pol + '</td><td>' + desc + '</td></tr>');
+                //получаем ссылку на последний элемент в таблице.
+                //и после него добавляем html
+                $('#table tr:last').after('<tr><td>' + name + '</td><td>' + surname + '</td><td>' + pol + '</td><td>' + desc + '</td></tr>');
+
+                //clearing fiealds
+                var elements = document.getElementById("my-form").elements;
+                for (var i = 0, element; element = elements[i++];) {
+                    if (element.type === "text" || element.type=="textarea") {
+                        element.value = "";
+                    }
+                }
+            }
         }
     </script>
 </head>
@@ -58,7 +71,7 @@
             <label for="desc">Описание:</label>
             <textarea name="desc" class="form-control" id="desc" title="Описание"></textarea>
         </div>
-        <button type="button" class="btn btn-default" onclick="return validate();">Submit</button>
+        <!-- <button type="button" class="btn btn-default" onclick="return validate();">Submit</button> -->
         <button type="button" class="btn btn-default" onclick="return add();">Add</button>
     </form>
 
