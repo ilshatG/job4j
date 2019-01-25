@@ -32,9 +32,12 @@
 
                 //получаем ссылку на последний элемент в таблице.
                 //и после него добавляем html
-                $('#table tr:last').after('<tr><td>' + name + '</td><td>' + surname + '</td><td>' + pol + '</td><td>' + desc + '</td></tr>');
+                //$('#table tr:last').after('<tr><td>' + name + '</td><td>' + surname + '</td><td>' + pol + '</td><td>' + desc + '</td></tr>');
 
-                //clearing fiealds
+                sendJSONtoServlet();
+                updateTable();
+
+                //clearing fields
                 var elements = document.getElementById("my-form").elements;
                 for (var i = 0, element; element = elements[i++];) {
                     if (element.type === "text" || element.type=="textarea") {
@@ -43,15 +46,55 @@
                 }
             }
         }
+
+        function sendJSONtoServlet() {
+            var person = {
+                name: $("#name").val(),
+                surname:$("#surname").val(),
+                pol:$("#pol").val(),
+                desc:$("#desc").val()
+            }
+
+            $('#status').html('sending..');
+
+            $.ajax({
+                url: "js",
+                type: "POST",
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+                    $('#target').html(data.msg);
+                },
+                data: JSON.stringify(person)
+            });
+        }
+
+        function updateTable() {
+            $.getJSON("js" , function(data) {
+                var tbl_body = "";
+                var odd_even = false;
+                $.each(data, function() {
+                    var tbl_row = "";
+                    $.each(this, function(k , v) {
+                        tbl_row += "<td>"+v+"</td>";
+                    })
+                    tbl_body += "<tr class=\""+( odd_even ? "odd" : "even")+"\">"+tbl_row+"</tr>";
+                    odd_even = !odd_even;
+                })
+                $("#table tbody").html(tbl_body);
+            });
+
+        }
     </script>
 </head>
+
 <body>
 
 <div class="container-fluid">
     <h1>Excellent Page</h1>
     <p>Job4j tutorial for front end.</p>
-
-    <form action="/action_page.php" id="my-form">
+    <label class="status"></label>
+    <form action="js" id="my-form" method="post">
         <div class="form-group">
             <label for="name">Имя:</label>
             <input type="text" class="form-control" id="name" title="Имя">
@@ -71,8 +114,8 @@
             <label for="desc">Описание:</label>
             <textarea name="desc" class="form-control" id="desc" title="Описание"></textarea>
         </div>
-        <!-- <button type="button" class="btn btn-default" onclick="return validate();">Submit</button> -->
         <button type="button" class="btn btn-default" onclick="return add();">Add</button>
+        <button type="button" class="btn btn-default" onclick="return updateTable();">Update</button>
     </form>
 
     <table class="table" id="table">
@@ -86,7 +129,7 @@
         </thead>
 
         <tbody>
-        <tr>
+       <!-- <tr>
             <td>John</td>
             <td>Doe</td>
             <td>муж</td>
@@ -103,7 +146,7 @@
             <td>Dooley</td>
             <td>жен</td>
             <td>Нормальная женщина так, ничего.</td>
-        </tr>
+        </tr> -->
         </tbody>
     </table>
 </div>
