@@ -1,5 +1,5 @@
 package ru.job4j.tictactoe;
-
+/*
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -136,4 +136,4 @@ public class TicTacToe extends Application {
         stage.setResizable(false);
         stage.show();
     }
-}
+}*/

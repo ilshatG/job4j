@@ -1,5 +1,5 @@
 package ru.job4j.tictactoe;
-
+/*
 import java.util.function.Predicate;
 
 public class Logic3T {
@@ -63,3 +63,4 @@ public class Logic3T {
         return result;
     }
 }
+*/

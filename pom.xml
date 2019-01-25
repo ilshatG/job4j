@@ -24,6 +24,7 @@
         <module>chapter_2_002</module>
         <module>chapter_2_003</module>
         <module>chapter_2_004</module>
+        <module>chapter_2_004_js</module>
     </modules>
 	 
 	 <build>
