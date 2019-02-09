@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class UsersController extends HttpServlet {
     private final ValidateService logic = ValidateService.getInstance();
-    private DispatchPattern dispatch = new DispatchPattern(logic);
+    private final DispatchPattern dispatch = new DispatchPattern(logic);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,33 +25,40 @@ public class UsersController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String action = req.getParameter("action");
-        String id = "";
-        String name = req.getParameter("user");
-        String login = req.getParameter("login");
-        String email = req.getParameter("email");
-        String createDate = req.getParameter("createDate");
-        String role = req.getParameter("role");
-        String password = req.getParameter("password");
-        User user = new User(0, name, login, email, createDate, role, password);
-        if (action.contains("delete")) {
-            id = action.substring(10);
-            action = "delete";
-            user = new User(Integer.parseInt(id), "", "", "", "", "");
-        }
-        if (action.contains("update")) {
-            id = action.substring(10);
-            action = "update";
-            if (role == null || role.equals("")) {
-                role = "guest";
-            }
-            user = new User(Integer.parseInt(id), name, login, email, createDate, role, password);
-        }
 
-        if (action != null) {
-            dispatch.doAction(action, user);
+        User user = new User(
+                    tryParseInt(req.getParameter("id")),
+                    req.getParameter("name"),
+                    req.getParameter("login"),
+                    req.getParameter("email"),
+                    req.getParameter("createDate"),
+                    req.getParameter("role"),
+                    req.getParameter("password"),
+                    req.getParameter("country"),
+                    req.getParameter("town")
+                );
+
+        DispathParams dispParams = new DispathParams(user, req, resp,null);
+
+
+        dispatch.doAction(action, dispParams);
+
+        resp.setHeader("Refresh", "5");
+
+        try {
+            resp.sendRedirect(req.getContextPath() + "/");
+        } catch (IOException e) {
+
         }
-        resp.sendRedirect(req.getContextPath() + "/");
+    }
+
+    int tryParseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch(NumberFormatException nfe) {
+            return 0;
+        }
     }
 }

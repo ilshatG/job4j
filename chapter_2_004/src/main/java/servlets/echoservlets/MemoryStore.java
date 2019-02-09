@@ -73,9 +73,9 @@ public class MemoryStore implements Store {
     }
 
     private void testData() {
-        add(new User(1, "Ivanov", "ivashka11", "ivashka778@test@ru", "01/1/2019"));
-        add(new User(2, "Petrashko", "petrashka421", "petrashka@test.com", "05/1/2019"));
-        add(new User(3, "Pjerow", "perov143", "perov@test.ru", "03/2/2019"));
+        add(new User(1, "Ivanov", "ivashka11", "ivashka778@test@ru", "01/1/2019", "admin", "admin", "Россия", "Самара"));
+        add(new User(2, "Petrashko", "petrashka421", "petrashka@test.com", "05/1/2019","admin", "admin", "Россия", "Самара"));
+        add(new User(3, "Pjerow", "perov143", "perov@test.ru", "03/2/2019","admin", "guest", "Россия", "Самара"));
     }
 
     @Override

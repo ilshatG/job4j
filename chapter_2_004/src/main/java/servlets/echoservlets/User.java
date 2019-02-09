@@ -5,12 +5,30 @@ import java.util.Random;
 
 public class User {
     private int id;
-    private String name;
-    private String login;
-    private String email;
-    private String createDate;
-    private String role;
-    private String password;
+    private String name = "";
+    private String login = "";
+    private String email = "";
+    private String createDate = "";
+    private String role = "";
+    private String password = "";
+    private String country = "";
+    private String town ="";
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getTown() {
+        return town;
+    }
 
     public String getRole() {
         return role;
@@ -26,6 +44,10 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public User(int id) {
+        this.id = id;
     }
 
     public User(int id, String name, String login, String email, String createDate) {
@@ -56,12 +78,24 @@ public class User {
 
     public User(int id, String name, String login, String email, String createDate, String role, String password) {
         this.id = id;
+        this.name = name == null ? "" : name;
+        this.login = login == null ? "" : login;
+        this.email = email == null ? "" : email;
+        this.createDate = createDate == null ? "" : createDate;
+        this.role = role == null ? "" : role;
+        this.password = password == null ? "" : password;
+    }
+
+    public User(int id, String name, String login, String email, String createDate, String role, String password, String country, String town) {
+        this.id = id;
         this.name = name;
         this.login = login;
         this.email = email;
         this.createDate = createDate;
         this.role = role;
         this.password = password;
+        this.country = country;
+        this.town = town;
     }
 
     public int getId() {
