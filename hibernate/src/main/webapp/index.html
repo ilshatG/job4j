@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple to do list</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function validate() {
+            var elements = document.getElementById("my-form").elements;
+            var errorText = "";
+            var result = true;
+            for (var i = 0, element; element = elements[i++];) {
+                if ((element.type == "text" || element.type=="textarea") && element.value == "")
+                    errorText = errorText + "\t" + element.title + "\n\r"
+            }
+            if (errorText!="") {
+                alert("Заполните:\n\r" + errorText);
+                result = false;
+            }
+            return result;
+        }
+        
+        function updateTable() {
+            var checkParam = $('#doneCheckBox').prop('checked');
+            $.getJSON("jsonData" , function(data) {
+                var tbl_body = "";
+                var odd_even = false;
+                $.each(data, function() {
+                    var tbl_row = "";
+
+                    if (checkParam.toString() == "true" || this["done"].toString() != "true" ) {
+                        var rowId = this["id"].toString();
+                        $.each(this, function(k , v) {
+                            if (k.toString() == "created") {
+                                tbl_row += "<td>"+timeStampToString(v)+"</td>";
+                            } else if (k.toString() == "done") {
+                                tbl_row += "<td>"+showCheckBox(v, rowId)+"</td>";
+                            }
+                            else {
+                                tbl_row += "<td>" + v + "</td>";
+                            }
+                        })
+                    }
+                    tbl_body += "<tr class=\""+( odd_even ? "odd" : "even")+"\">"+tbl_row+"</tr>";
+                    odd_even = !odd_even;
+                })
+                $("#table tbody").html(tbl_body);
+            });
+
+        }
+
+        function timeStampToString(millis) {
+            var date = new Date(millis);
+            return date.toString();
+        }
+
+        function showCheckBox(value, id) {
+            var checked = "";
+            if(value.toString()=="true") {
+                checked = " checked";
+            }
+            return '<input type="checkbox" name="chkBox" id = "chkBox" onchange="changeDone(this)" value="'+id+'" ' + checked +'/>';
+        }
+
+        $(function(){
+        $(".btn").click(function() {
+            if (!validate()){
+                return false;
+            }
+            $('#pleaseWaitDialog').modal();
+
+            var description = $("input#description").val();
+            var dataStr = "description=" + description;
+             $.ajax({
+                type: "POST",
+                url: "controller",
+                async: false,
+                data: dataStr,
+                success: function () {
+
+                }
+            });
+            updateTable();
+            $("input#description").val("");
+            $('#pleaseWaitDialog').modal('hide');
+            return false;
+        });
+        });
+
+
+        function changeDone(boxValue) {
+            $("#pleaseWaitDialog").modal();
+            var id = boxValue.value;
+            var checkStatus = boxValue.checked;
+            var dataStr = "id=" + id + "&" + "done=" + checkStatus;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "controller",
+                data: dataStr});
+            updateTable();
+            $('#pleaseWaitDialog').modal('hide');
+        }
+
+    </script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <h1>To do list</h1>
+    <p>Hibernate Job4j tutorial</p>
+    <h2>Add new task</h2>
+    <label class="status"></label>
+    <form action="" id="my-form" method="post">
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" name="description" title="task description"/>
+        </div>
+
+        <button type="submit" class="btn">Add</button>
+        <!--onclick="return validate();"-->
+    </form>
+    <h3>Table of tasks</h3>
+    <p>Show done tasks <input type="checkbox" id="doneCheckBox" name="sh" value="a1" checked onchange="updateTable()"/></p>
+    <table class="table" id="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>description</th>
+            <th>created</th>
+            <th>done</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>updateTable();</script>
+</div>
+
+<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <h1>Please Wait</h1>
+    </div>
+    <div class="modal-body">
+        <div id="ajax_loader">
+            <img src="~/Images/ajax-loader.gif" style="display: block; margin-left: auto; margin-right: auto;">
+        </div>
+    </div>
+</div>
+</body>
+</html>

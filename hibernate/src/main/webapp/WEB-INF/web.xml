@@ -1,0 +1,28 @@
+<web-app>
+    <listener>
+        <listener-class>
+            config.ContextListener
+        </listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>config.Controller</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JSON</servlet-name>
+        <servlet-class>config.JSON</servlet-class>
+
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JSON</servlet-name>
+        <url-pattern>/jsonData</url-pattern>
+    </servlet-mapping>
+</web-app>
