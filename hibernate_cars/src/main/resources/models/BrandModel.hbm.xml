@@ -1,0 +1,9 @@
+<hibernate-mapping>
+    <class name="models.BrandModel" table="brand_models">
+        <composite-id>
+            <key-property name="brandId" column="brand_id"/>
+            <key-property name="modelId" column="model_id"/>
+        </composite-id>
+
+    </class>
+</hibernate-mapping>

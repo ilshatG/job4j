@@ -1,0 +1,18 @@
+<hibernate-mapping>
+    <class name="models.Brand" table="brands">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name" not-null="true" unique="true" />
+
+        <set name="models" table="brand_models"
+             inverse="false" lazy="true" fetch="select" cascade="all" >
+            <key>
+                <column name="brand_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="models.Model">
+                <column name="model_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
