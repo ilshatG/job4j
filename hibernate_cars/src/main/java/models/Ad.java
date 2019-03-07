@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * Advertisement of car selling
@@ -173,4 +174,33 @@ public class Ad {
         this.sale = sale;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ad ad = (Ad) o;
+        return id == ad.id &&
+                owners == ad.owners &&
+                engineVolume == ad.engineVolume &&
+                carMeleage == ad.carMeleage &&
+                year == ad.year &&
+                powerOfEngine == ad.powerOfEngine &&
+                Double.compare(ad.price, price) == 0 &&
+                sale == ad.sale &&
+                Objects.equals(brandModel, ad.brandModel) &&
+                Objects.equals(wheel, ad.wheel) &&
+                Objects.equals(drive, ad.drive) &&
+                Objects.equals(colour, ad.colour) &&
+                Objects.equals(carBody, ad.carBody) &&
+                Objects.equals(engineType, ad.engineType) &&
+                Objects.equals(transmission, ad.transmission) &&
+                Objects.equals(user, ad.user) &&
+                Objects.equals(Description, ad.Description) &&
+                Objects.equals(published, ad.published);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brandModel, wheel, drive, colour, carBody, engineType, transmission, user, owners, engineVolume, carMeleage, year, powerOfEngine, Description, published, price, sale);
+    }
 }

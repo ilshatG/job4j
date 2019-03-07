@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class EngineType {
     private long id;
     private String name;
@@ -29,5 +31,19 @@ public class EngineType {
 
     public EngineType(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EngineType that = (EngineType) o;
+        return id == that.id &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

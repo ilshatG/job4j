@@ -11,21 +11,20 @@ import java.util.function.Function;
  * Data Access Object
  */
 public class Dao {
-    private static Dao instance;
-    private static SessionFactory factory;
+    private final static Dao instance = new Dao();
+    private final static SessionFactory factory = initFactory();
 
-    private Dao() {
+    private static SessionFactory initFactory() {
+        SessionFactory result = null;
         try {
-            this.factory = new Configuration().configure().buildSessionFactory();
+            result = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
         }
-    };
+        return result;
+    }
 
-    public static synchronized Dao getInstance() {
-        if (instance == null) {
-            instance = new Dao();
-        }
+    public static Dao getInstance() {
         return instance;
     }
 

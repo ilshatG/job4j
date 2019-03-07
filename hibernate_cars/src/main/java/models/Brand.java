@@ -1,6 +1,7 @@
 package models;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -41,5 +42,20 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Brand brand = (Brand) o;
+        return id == brand.id &&
+                Objects.equals(name, brand.name) &&
+                Objects.equals(models, brand.models);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, models);
     }
 }
