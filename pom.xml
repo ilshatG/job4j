@@ -27,6 +27,7 @@
         <module>chapter_2_004_js</module>
         <module>hibernate</module>
         <module>hibernate_cars</module>
+        <module>chapter_2_spring</module>
     </modules>
 	 
 	 <build>
