@@ -3,11 +3,11 @@ package ru.job4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class UserStorage {
     private final Storage storage;
 
-    @Autowired
+    //@Autowired
     public UserStorage(final Storage storage) {
         this.storage = storage;
     }
