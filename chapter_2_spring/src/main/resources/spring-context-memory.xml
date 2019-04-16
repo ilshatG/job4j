@@ -7,10 +7,10 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="memory" class="ru.job4j.MemoryStorage"/>
-    <bean id="storage" class="ru.job4j.UserStorage">
+
+    <bean id="storageInRam" class="ru.job4j.UserStorage">
         <constructor-arg name="storage" ref="memory"> </constructor-arg>
     </bean>
 
-    <!--
-    <context:component-scan base-package="ru.job4j"/> !-->
+    <!-- <context:component-scan base-package="ru.job4j"/> !-->
 </beans>
