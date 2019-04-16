@@ -1,0 +1,14 @@
+<web-app>
+
+    <servlet>
+        <servlet-name>JS</servlet-name>
+        <servlet-class>servlets.echoservlets.JSON</servlet-class>
+
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JS</servlet-name>
+        <url-pattern>/js</url-pattern>
+    </servlet-mapping>
+
+</web-app>

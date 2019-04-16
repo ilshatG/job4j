@@ -28,6 +28,7 @@
         <module>hibernate</module>
         <module>hibernate_cars</module>
         <module>chapter_2_spring</module>
+        <module>chapter_2_spring_mvc</module>
     </modules>
 	 
 	 <build>

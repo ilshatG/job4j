@@ -1,14 +1,67 @@
 <web-app>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>servlets.echoservlets.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>
+            servlets.echoservlets.ContextListener
+        </listener-class>
+    </listener>
+    <context-param>
+       <param-name>defaultUser</param-name>
+        <param-value>admin</param-value>
+    </context-param>
 
     <servlet>
-        <servlet-name>JS</servlet-name>
-        <servlet-class>servlets.echoservlets.JSON</servlet-class>
+        <servlet-name>User View Servlet</servlet-name>
+        <servlet-class>servlets.echoservlets.UsersController</servlet-class>
+        <init-param>
+            <param-name>userName</param-name>
+            <param-value>admin</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>User View Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserCreateServlet</servlet-name>
+        <servlet-class>servlets.echoservlets.UserCreateServlet</servlet-class>
 
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>JS</servlet-name>
-        <url-pattern>/js</url-pattern>
+        <servlet-name>UserCreateServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Signin</servlet-name>
+        <servlet-class>servlets.echoservlets.SigninController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Signin</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+                <scripting-invalid>
+                    true
+                </scripting-invalid>
+        </jsp-property-group>
+    </jsp-config>
 
 </web-app>
