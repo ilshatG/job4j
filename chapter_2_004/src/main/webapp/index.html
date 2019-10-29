@@ -13,7 +13,7 @@
             var errorText = "";
             var result = true;
             for (var i = 0, element; element = elements[i++];) {
-                if ((element.type === "text" || element.type=="textarea") && element.value === "")
+                if ((element.type == "text" || element.type=="textarea") && element.value === "")
                     errorText = errorText + "\t" + element.title + "\n\r"
             }
             if (errorText!="") {

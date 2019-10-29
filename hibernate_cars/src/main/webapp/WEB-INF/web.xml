@@ -1,0 +1,23 @@
+<web-app>
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>Controller</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JSON</servlet-name>
+        <servlet-class>JSON</servlet-class>
+
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>JSON</servlet-name>
+        <url-pattern>/jsonData</url-pattern>
+    </servlet-mapping>
+</web-app>

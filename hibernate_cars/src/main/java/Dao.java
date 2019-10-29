@@ -1,3 +1,5 @@
+import models.Ad;
+import models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -5,14 +7,26 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
+import java.util.List;
 import java.util.function.Function;
 
 /**
  * Data Access Object
  */
-public class Dao {
+public class Dao implements Store {
     private final static Dao instance = new Dao();
     private final static SessionFactory factory = initFactory();
+
+    @Override
+    public List getListFromSQL(String query) {
+        return this.tx(session -> {
+            List result = session.createSQLQuery(query).list();
+            return result;
+        });
+    }
+
+    private Dao() {
+    }
 
     private static SessionFactory initFactory() {
         SessionFactory result = null;
@@ -49,6 +63,7 @@ public class Dao {
         }
     }
 
+    @Override
     public <T> boolean add(T t) {
         return this.tx(
                 session -> {
@@ -71,4 +86,25 @@ public class Dao {
                 }
         );
     }
+
+    @Override
+    public void update(Ad item) {
+
+    }
+
+    @Override
+    public void delete(Ad item) {
+
+    }
+
+    @Override
+    public List<User> getAll() {
+        return null;
+    }
+
+    @Override
+    public User currentUser(String login, String password) {
+        return null;
+    }
+
 }
