@@ -20,7 +20,7 @@ public class Hero {
      * Метод ставит героя в произвольную клетку поля. Если клетка занята, то производятся еще попытки,
      * число которых ограничено общим количеством клеток во второй степени.
      */
-    public synchronized void setToRandomCell() {
+    public void setToRandomCell() {
         List<ReentrantLock> boardAsList = board.stream().collect(Collectors.toList());
         boolean result = false;
         long counter = boardAsList.size() * boardAsList.size();
@@ -39,7 +39,7 @@ public class Hero {
      * @param point координаты
      * @return
      */
-    public synchronized boolean setToPoint(Point point) {
+    public boolean setToPoint(Point point) {
         if (point.x > -1 && point.y > -1 && point.x < board.getWidth() && point.y < board.getHeight() &&
                 !board.getLock(point).isLocked()) {
             board.getLock(point).lock();
